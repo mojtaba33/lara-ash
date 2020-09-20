@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['a
 
     Route::resource('category' , 'CategoryController');
 
+    Route::resource('blog' , 'BlogController');
+
     Route::get('product/{product}/option','ProductController@option')->name('product.option');
     Route::post('product/{product}/add/option','ProductController@addOption')->name('product.addOption');
     Route::resource('product' , 'ProductController');
@@ -78,8 +80,14 @@ Route::prefix('cart')->group(function (){
 Route::post('payment', 'CartController@payment')->middleware('verified');
 Route::get('payment/checker', 'CartController@checker');
 
-Route::get('user/profile', 'UserController@profile')->name('user.profile');
-Route::patch('user/profile', 'UserController@update')->name('user.profile.update');
+Route::get('user/profile', 'UserController@profile')->name('user.profile')->middleware('verified');
+Route::patch('user/profile', 'UserController@update')->name('user.profile.update')->middleware('verified');
+
+Route::get('blog','BlogController@blog')->name('blog.all');
+Route::get('blog/{blog:slug}','BlogController@single')->name('blog.single');
+Route::get('blog/category/{category:slug}','BlogController@category')->name('blog.category');
+
+Route::get('blog/tags/{tag}','BlogController@tag')->name('blog.tag');
 /*Route::get('/', function(){
     $category = \App\Category::where('parent_id' , 0)->first();
     echo $category->getProducts()->Count();

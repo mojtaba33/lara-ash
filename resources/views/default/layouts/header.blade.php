@@ -86,7 +86,7 @@
                         </li>
                         @endforeach
                         <li><a href="./shop.html">Shop</a></li>
-                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="{{ route('blog.all') }}">Blog</a></li>
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>

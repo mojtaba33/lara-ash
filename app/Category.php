@@ -43,6 +43,11 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
     public function filters()
     {
         return $this->hasMany(Filter::class);
