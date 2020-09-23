@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'rate' , 'body' , 'product_id' , 'user_id' , 'parent_id' , 'approved'
+        'rate' , 'body' ,'commentable_id',
+        'commentable_type' , 'user_id' , 'parent_id' , 'approved'
     ];
 
     public function user()
@@ -15,10 +16,10 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+    /*public function product()
     {
         return $this->belongsTo(Product::class);
-    }
+    }*/
 
     public function child()
     {
@@ -28,5 +29,10 @@ class Comment extends Model
     public function parent()
     {
         return $this->belongsTo(Comment::class,'parent_id','id');
+    }
+
+    public function commentable()
+    {
+        return $this->morphTo();
     }
 }

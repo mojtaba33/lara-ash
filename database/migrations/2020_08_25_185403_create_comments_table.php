@@ -16,7 +16,10 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+
+            $table->bigInteger('commentable_id');
+            $table->string('commentable_type');
+
             $table->text('body');
             $table->bigInteger('parent_id')->default(0);
             $table->bigInteger('rate')->default(0);

@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['admin','verified']],function (){
     Route::get('panel' , 'HomeController@index')->name('admin.panel');
 
+    Route::middleware('can:edit-users')->group(function (){
+        Route::get('user/admins','UserController@admins')->name('user.admins');
+        Route::patch('user/role/{user}','UserController@setRole')->name('user.setRole');
+        Route::resource('user','UserController');
+        Route::resource('role','RoleController');
+    });
+
     Route::patch('/filter/add','FilterController@add')->name('filter.add');
     Route::post('/filter/','FilterController@getFilters')->name('get.filter');
     Route::delete('/filter/delete','FilterController@delete')->name('filter.delete');
@@ -28,6 +35,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['a
     Route::resource('category' , 'CategoryController');
 
     Route::resource('blog' , 'BlogController');
+
+    Route::resource('banner' , 'BannerController');
 
     Route::get('product/{product}/option','ProductController@option')->name('product.option');
     Route::post('product/{product}/add/option','ProductController@addOption')->name('product.addOption');
@@ -63,7 +72,7 @@ Route::get('/product/{product:slug}', 'ProductController@single');
 
 Route::post('/comment/add', 'CommentController@store')->name('add.comment')->middleware('verified');
 
-Route::get('category','CategoryController@index');
+Route::get('category/','CategoryController@index')->name('category.all');
 Route::get('category/{category:slug}','CategoryController@single')->name('category.single');
 
 Route::get('checkout','CartController@checkout')->name('checkout.index');
@@ -77,6 +86,10 @@ Route::prefix('cart')->group(function (){
     Route::patch('/address/{checkout}','CartController@address')->name('cart.address');
 });
 
+Route::post('fav/add/','FavouriteController@addAjax')->name('add.to.fav.ajax');
+Route::get('fav/add/{product}','FavouriteController@add')->name('add.to.fav')->middleware('verified');
+Route::delete('fav/delete/{product}','FavouriteController@destroy')->name('delete.fav')->middleware('verified');
+
 Route::post('payment', 'CartController@payment')->middleware('verified');
 Route::get('payment/checker', 'CartController@checker');
 
@@ -88,6 +101,13 @@ Route::get('blog/{blog:slug}','BlogController@single')->name('blog.single');
 Route::get('blog/category/{category:slug}','BlogController@category')->name('blog.category');
 
 Route::get('blog/tags/{tag}','BlogController@tag')->name('blog.tag');
+
+Route::get('search','IndexController@search')->name('search.index');
+
+//Socialite
+Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+
 /*Route::get('/', function(){
     $category = \App\Category::where('parent_id' , 0)->first();
     echo $category->getProducts()->Count();

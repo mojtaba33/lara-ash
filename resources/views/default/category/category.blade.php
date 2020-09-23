@@ -63,6 +63,8 @@
                                 </div>
                             </div>
 
+                                <input  name="item" type="hidden" value="{{ request('item') }}">
+
                             <div class="sidebar__sizes" id="size" style="margin-top: 50px">
                                 <div class="section-title">
                                     <h5>size</h5>

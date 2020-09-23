@@ -35,7 +35,8 @@ class CommentController extends Controller
 
         auth()->user()->comments()->create([
             'body' => $request->input('body'),
-            'product_id' => $comment->product_id,
+            'commentable_id' => $comment->commentable_id,
+            'commentable_type' => $comment->commentable_type,
             'parent_id' => $comment->id,
             'approved' => 1 ,
         ]);

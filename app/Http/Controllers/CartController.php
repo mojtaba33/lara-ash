@@ -56,6 +56,10 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+        if (!auth()->check()){
+            return response(['title' => 'warning' , 'color' => 'yellow' , 'message' => 'login first']);
+        }
+
         $product = Product::find($request->input('product_id'));
         $count   = $request->input('count');
         $color   = $request->input('color');
@@ -64,10 +68,6 @@ class CartController extends Controller
         if ($count <= 0 || $color == null || $size == null )
         {
             return \response()->json(['title' => 'warning','message' => 'something went wrong!','color'=>'yellow']);
-        }
-
-        if (!auth()->check()){
-            return response(['title' => 'warning' , 'color' => 'yellow' , 'message' => 'login first']);
         }
 
         if (!auth()->user()->checkouts()->pluck('payment')->contains(0)){ //if checkout not exist

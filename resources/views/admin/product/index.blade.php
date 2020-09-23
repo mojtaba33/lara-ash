@@ -24,6 +24,7 @@
                             <tr>
                                 <td><a href="{{ $product->path() }}">{{ $product->title }}</a></td>
                                 <td><a href="{{ $product->category->path() }}"> {{ $product->category->title }} </a></td>
+                                @can('edit-own-product',$product)
                                 <td>
 
                                     <form action="{{route('product.destroy',$product->id)}}" method="post">
@@ -37,6 +38,7 @@
                                         <button type="submit" class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
                                     </form>
                                 </td>
+                                @endcan
                             </tr>
 
                         @endforeach

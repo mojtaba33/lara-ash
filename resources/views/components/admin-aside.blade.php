@@ -8,7 +8,21 @@
                     <span>صفحه اصلی</span>
                 </a>
             </li>
-
+            @can('edit-users')
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon-book"></i>
+                        <span>کاربران</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="{{ route('user.index') }}"> لیست کاربران </a></li>
+                        <li><a class="" href="{{ route('user.admins') }}"> لیست ادمین ها </a></li>
+                        <li><a class="" href="{{ route('role.index') }}"> لیست مقام ها </a></li>
+                        <li><a class="" href="{{ route('role.create') }}"> افزودن مقام جدید </a></li>
+                    </ul>
+                </li>
+            @endcan
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon-cogs"></i>

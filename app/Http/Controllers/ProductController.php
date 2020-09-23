@@ -22,6 +22,8 @@ class ProductController extends Controller
             ->where('parent_id',0)
             ->latest()
             ->paginate(20)->withQueryString();
+
+        //dd($product->comments);
         return view('default.product.single',compact('product','comments','relatedProducts'));
     }
 }

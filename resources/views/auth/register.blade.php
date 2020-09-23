@@ -52,6 +52,8 @@
                             </div>
                         </div>
 
+                        @reCaptcha
+
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
@@ -65,6 +67,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <a href="{{ url('login/google') }}" class="btn btn-primary">login with google account</a>
                             </div>
                         </div>
                     </form>

@@ -186,7 +186,8 @@
                                         @if(auth()->check())
                                             <form method="post" action="{{ route('add.comment') }}" >
                                             @csrf
-                                            <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="commentable_id" id="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="commentable_type" id="product_id" value="{{ get_class($product) }}">
                                             <input type="hidden" name="parent_id" id="parent_id" value="0">
 
                                             <div class="form-group">
@@ -302,7 +303,8 @@
                     <form action="{{ route('add.comment') }}" method="post" role="form">
                         @csrf
                         @method('post')
-                        <input type="hidden" name="product_id" id="model-product_id">
+                        <input type="hidden" name="commentable_id" id="model-commentable_id">
+                        <input type="hidden" name="commentable_type" id="model-commentable_type">
                         <input type="hidden" name="parent_id" id="model-parent_id">
                         <div class="form-group">
                             <textarea class="form-control" disabled id="review-body"></textarea>
@@ -339,13 +341,15 @@
                 var recipient = button.data('whatever') ;// Extract info from data-* attributes
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var product_id = button.data('product_id') ;
+                var commentable_id = button.data('commentable_id') ;
+                var commentable_type = button.data('commentable_type') ;
                 var parent_id = button.data('parent_id') ;
                 var body = button.data('body') ;
                 var modal = $(this);
                 modal.find('.modal-title').text(' answering to ' + recipient);
                 modal.find('#review-body').val(body);
-                modal.find('#model-product_id').val(product_id);
+                modal.find('#model-commentable_id').val(commentable_id);
+                modal.find('#model-commentable_type').val(commentable_type);
                 modal.find('#model-parent_id').val(parent_id);
             })
         </script>

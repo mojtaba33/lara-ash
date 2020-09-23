@@ -13,12 +13,23 @@ class CommentController extends Controller
             'rating' => 'numeric|min:0|max:5',
         ]);
 
+        $commentable_type = $request->input('commentable_type');
+
+        if ( json_decode($request->input('commentable_type')) != null )
+        {
+            $commentable_type = json_decode($request->input('commentable_type'));
+        }
+
         auth()->user()->comments()->create([
             'body' => $request->input('body'),
-            'product_id' => $request->input('product_id'),
             'parent_id' => $request->input('parent_id'),
+            'commentable_id' => $request->input('commentable_id'),
+            'commentable_type' => $commentable_type,
             'rate' => $request->input('rate') != null ? $request->input('rate') : 0 ,
         ]);
+
+
+        //auth()->user()->comments()->create(\request()->all());
 
         return back()->with('message','Your review has been successfully registered');
     }

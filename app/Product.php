@@ -48,6 +48,11 @@ class Product extends Model
         return $this->hasMany(Gallery::class);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class)->as('favorites')->withTimestamps();
+    }
+
     public function filters()
     {
         return $this->belongsToMany(Filter::class)->withPivot('value');
@@ -60,7 +65,7 @@ class Product extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function carts()
@@ -97,6 +102,16 @@ class Product extends Model
         return false;
     }
 
+    public function scopeSearch($query)
+    {
+        if (request('item') != null)
+        {
+            $query->where('title','like','%'. request('item') .'%');
+        }
+
+        return $query;
+    }
+
     public function scopeFilter($query)
     {
         if (\request()->input('maxPrice') != null)
@@ -117,6 +132,11 @@ class Product extends Model
             if (\request()->has($size)) {
                 $query->where('size','LIKE',"%'".$size."'%");
             }
+        }
+
+        if (request('item') != null)
+        {
+            $query->where('title','like','%'. request('item') .'%');
         }
         /*if (\request()->input('size') != null){
             $size = \request()->input('size');

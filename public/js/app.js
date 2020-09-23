@@ -2024,6 +2024,27 @@ __webpack_require__.r(__webpack_exports__);
           color: 'red'
         });
       });
+    },
+    addToFav: function addToFav() {
+      axios.post('/fav/add', {
+        product_id: this.product_id
+      }).then(function (response) {
+        console.log(response);
+        iziToast.show({
+          title: response.data.title,
+          message: response.data.message,
+          rtl: false,
+          color: response.data.color
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        iziToast.show({
+          title: 'error',
+          message: 'something went wrong!',
+          rtl: false,
+          color: 'red'
+        });
+      });
     }
   }
 });
@@ -38801,7 +38822,25 @@ var render = function() {
         [_c("span", { staticClass: "icon_bag_alt" }), _vm._v(" Add to cart")]
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c("ul", [
+        _c("li", [
+          _c(
+            "a",
+            {
+              attrs: { href: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addToFav()
+                }
+              }
+            },
+            [_c("span", { staticClass: "icon_heart_alt" })]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "product__details__widget" }, [
@@ -38922,17 +38961,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("span", { staticClass: "icon_heart_alt" })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("span", { staticClass: "icon_adjust-horiz" })
-        ])
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "icon_adjust-horiz" })
       ])
     ])
   },

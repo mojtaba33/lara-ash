@@ -28,4 +28,35 @@ class IndexController extends Controller
             'bestSellerProducts','topOfferProducts'
         ));
     }
+
+    public function search(Request $request)
+    {
+        $item = $request->input('item');
+
+        $products = Product::where('title','like','%'. $item .'%')->latest()->take(3)->get();
+
+        $categories = Category::where('title','like','%'. $item .'%')->latest()->take(3)->get();
+
+        $products->isNotEmpty() ? $res ="<tr><td colspan='2' style='background-color: #eee;color: dodgerblue;'>products</td></tr>" : $res ="" ;
+
+        foreach ($products as $product)
+        {
+            $res .=  "
+                    <tr >
+                        <td class='align-middle'><img height='50' src=".url($product->image[90])."></td>
+                        <td class='align-middle'><a style='color: #fff' href='{$product->path()}'>{$product->title}</a></td>
+                    </tr>";
+        }
+
+        $categories->isNotEmpty() ? $res .="<tr><td colspan='2' style='background-color: #eee;color: dodgerblue;'>categories</td></tr>" : $res .="" ;
+
+        foreach ($categories as $category)
+        {
+            $res .=  "<tr >
+                        <td class='align-middle' colspan='2'><a style='color: #fff' href='{$category->path()}'>{$category->title}</a></td>
+                      </tr>";
+        }
+
+        return $res;
+    }
 }

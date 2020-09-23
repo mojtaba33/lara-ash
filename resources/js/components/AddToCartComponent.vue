@@ -11,7 +11,7 @@
             </div>
             <a  href="" class="cart-btn" @click.prevent="addToCart()"><span class="icon_bag_alt"></span> Add to cart</a>
             <ul>
-                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt"></span></a></li>
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
             </ul>
         </div>
@@ -122,7 +122,31 @@
                             color: 'red',
                         });
                     });
-            }
+            },
+            addToFav(){
+                axios
+                    .post('/fav/add',{
+                        product_id : this.product_id
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        iziToast.show({
+                            title: response.data.title,
+                            message: response.data.message,
+                            rtl: false,
+                            color: response.data.color,
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        iziToast.show({
+                            title: 'error',
+                            message: 'something went wrong!',
+                            rtl: false,
+                            color: 'red',
+                        });
+                    });
+            },
         },
 
     }

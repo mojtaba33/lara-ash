@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $comment->user->name }}</td>
                                 <td>{{ $comment->user->email }}</td>
-                                <td><a href="{{ $comment->product->path() }}">{{ $comment->product->title }}</a></td>
+                                <td><a href="{{ $comment->commentable->path() }}">{{ $comment->commentable->title }}</a></td>
                                 <td>{{ $comment->body }}</td>
                                 <td>
                                     <form action="{{route('comment.destroy',$comment->id)}}" method="post">

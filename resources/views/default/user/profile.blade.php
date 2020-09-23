@@ -17,6 +17,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="false">favorite product</a>
+                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="panel" role="tabpanel" aria-labelledby="panel-tab">
@@ -164,6 +167,37 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                            <table class="table table-striped table-advance">
+                                    <thead>
+                                    <tr>
+                                        <th>title</th>
+                                        <th>image</th>
+                                        <th>price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach(auth()->user()->favorites as $product)
+                                        <tr>
+                                            <td class="align-middle"><a style="color: #000;" href="{{ $product->path() }}">{{ $product->title }}</a></td>
+                                            <td class="align-middle"><img src="{{ url($product->image[90]) }}" alt=""></td>
+                                            <td class="align-middle">{{ $product->getPrice() }}</td>
+                                            <td class="align-middle">
+                                                <form action="{{ route('delete.fav',$product) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        remove
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

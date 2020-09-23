@@ -42,8 +42,8 @@
     <div class="offcanvas__close">+</div>
     <ul class="offcanvas__widget">
         <li><span class="icon_search search-switch"></span></li>
-        <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
+        <li><a href="{{ route('user.profile') }}"><span class="icon_heart_alt"></span>
+                <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
             </a></li>
         <li><a href="#"><span class="icon_bag_alt"></span>
                 <div class="tip">2</div>
@@ -111,8 +111,8 @@
                     </div>
                     <ul class="header__right__widget" style="display: flex;justify-content: center;align-items: center;">
                         <li><span class="icon_search search-switch"></span></li>
-                        <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
+                        <li><a href="{{ route('user.profile') }}"><span class="icon_heart_alt"></span>
+                                <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
                             </a></li>
                         <cart :carts="carts"></cart>
                     </ul>

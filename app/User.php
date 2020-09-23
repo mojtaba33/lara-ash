@@ -38,6 +38,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class)->as('favorites')->withTimestamps();
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -56,5 +61,33 @@ class User extends Authenticatable implements MustVerifyEmail
     public function checkouts()
     {
         return $this->hasMany(Checkout::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        foreach ($this->roles()->get() as $userRoles) {
+            if ($role->id == $userRoles->id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRoleGate($roles)
+    {
+        if(is_string($roles)){
+            return $this->roles->contains('title',$roles);
+        }
+        else{
+            foreach ($roles as $role){
+                return $this->hasRoleGate($role);
+            }
+        }
+        return false;
     }
 }

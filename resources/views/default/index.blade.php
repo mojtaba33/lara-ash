@@ -61,12 +61,14 @@
                         <div class="product__item__pic set-bg" data-setbg="{{ url($newProduct->image[360]) }}">
                             <ul class="product__hover">
                                 <li><a href="{{ url($newProduct->image['original']) }}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                <li>
+                                    <a href="{{ route('add.to.fav',$newProduct) }}"><span class="icon_heart_alt"></span></a>
+                                </li>
+                                <li><a href="{{ $newProduct->path() }}"><span class="icon_bag_alt"></span></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="{{ $newProduct->path() }}">{{ $newProduct->title }}</a></h6>
+                            <h6><a href="c">{{ $newProduct->title }}</a></h6>
                             @if($newProduct->getProductRate() != 0)
                                 <div class="rating">
                                     @for($i=1; $i<=$newProduct->getProductRate() ; $i++)
@@ -285,4 +287,17 @@
         </div>
     </section>
     <!-- Services Section End -->
+    @push('scripts')
+    @if(session()->has('message'))
+        <script>
+            iziToast.show({
+                title: " {{ session('title') }} ",
+                message: "{{ session('message') }}",
+                rtl: false,
+                color: "{{ session('color') }}",
+            });
+
+        </script>
+    @endif
+    @endpush
 @endsection

@@ -130,10 +130,17 @@
 
 <!-- Search Begin -->
 <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="h-100 d-flex justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
+        <form class="search-model-form" style="position:relative;top: 100px;" action="{{ route('category.all') }}">
+            <input type="text" name="item" id="search-input" placeholder="Search here.....">
+            <div  style="position: absolute;width: 100%;">
+                <table class="table table-striped table-dark">
+                    <tbody id="search_item_holder">
+
+                    </tbody>
+                </table>
+            </div>
         </form>
     </div>
 </div>
@@ -141,6 +148,8 @@
 <!-- Search End -->
 
 <!-- Js Plugins -->
+<script src="/js/app.js"></script>
+
 <script src="/default/js/jquery-3.3.1.min.js"></script>
 <script src="/default/js/bootstrap.min.js"></script>
 <script src="/default/js/jquery.magnific-popup.min.js"></script>
@@ -152,7 +161,27 @@
 <script src="/default/js/jquery.nicescroll.min.js"></script>
 <script src="/default/js/main.js"></script>
 <script src="/default/js/iziToast.min.js"></script>
-<script src="/js/app.js"></script>
+
+<script>
+
+        $("#search-input").keyup(function () {
+            let item = $(this).val();
+            axios
+                .get( '/search' , {
+                    params: {
+                        item: item
+                    }
+                })
+                .then(function (response) {
+                    console.log(response.data);
+                    $('#search_item_holder').html(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        })
+</script>
+
 @stack('scripts')
 
 

@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Rules\CAPTCHA;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -36,5 +42,50 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->stateless()->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $google = Socialite::driver('google')->stateless()->user();
+
+        $user = User::where('email',$google->getEmail())->first();
+
+        if (!$user){
+            $user = User::create([
+                'name' => $google->getName(),
+                'email' => $google->getEmail(),
+                'avatar' => $google->getAvatar(),
+                'password' => Hash::make($google->getId()),
+                'email_verified_at' => Carbon::now(),
+            ]);
+        }
+
+        auth()->login($user,true);
+
+        return redirect('/');
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            're_captcha' => new CAPTCHA,
+        ]);
     }
 }

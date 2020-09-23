@@ -34,8 +34,15 @@ class BlogController extends Controller
             })->latest()->take(3)->get();
 
         $categories = Category::where('parent_id' , '!=' , 0)->get();
+
+        $comments = $blog->comments()
+            ->where('approved',1)
+            ->where('parent_id',0)
+            ->latest()
+            ->paginate(20)->withQueryString();
+
         return view('default.blog.single',compact(
-            'blog','categories','next','previous','related'
+            'blog','categories','next','previous','related','comments'
         ));
     }
 

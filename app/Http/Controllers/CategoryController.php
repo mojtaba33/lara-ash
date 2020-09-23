@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id',0)->get();
-        $products = Product::latest()->paginate(9)->withQueryString();
+        $products = Product::search()->latest()->paginate(9)->withQueryString();
         return view('default.category.category',compact('categories','products'));
     }
 
@@ -33,7 +33,7 @@ class CategoryController extends Controller
                  'pageName' => 'page'
                 ]);
         }else{
-            $products = $category->products()->filter()->latest()->paginate(9)->withQueryString();
+            $products = $category->products()->filter()->search()->latest()->paginate(9)->withQueryString();
         }
 
         return view('default.category.category',compact('categories','products'));
