@@ -39,22 +39,14 @@ class AdminController extends Controller
      */
     public function resizeImage($fileName, $file, $path, array $sizes)
     {
-        /*if ()
-        {
-
-        }*/
-        //dd($sizes);
         foreach ($sizes as $size){
-            //dd($size);
             $img = Image::make($file)
                 ->resize($size['width'], $size['height'],function ($constraint) {
                     $constraint->aspectRatio();
                 })->save(
                     $path.'/'.(string)$size['width'].'x'.(string)$size['height'].'_'.$fileName
                 );
-
             $result [$size['width'] != null ? $size['width'] : $size['height'] ]= $path.'/'.$img->basename;
-
         }
 
         return $result;

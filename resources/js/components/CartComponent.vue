@@ -2,7 +2,7 @@
     <li class="li_cart">
         <a href="/cart">
             <span class="icon_bag_alt"></span>
-            <div class="tip"> {{ totalCount}}</div>
+            <div class="tip"> {{ totalCount }}</div>
         </a>
         <ul class="cart_items" v-if="cartData != null">
             <li class="cart_item" v-for="(cart , index) in cartData">

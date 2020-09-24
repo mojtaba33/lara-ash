@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'parent_id','title','slug','image','description','show','position',
+        'parent_id','title','slug',
     ];
 
     use Sluggable;

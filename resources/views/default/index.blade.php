@@ -6,25 +6,23 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
-                         data-setbg="{{ $leftCategory->image }}">
+                         data-setbg="{{ $leftBanner->image }}">
                         <div class="categories__text">
-                            <h1>{{ $leftCategory->title }}</h1>
-                            <p>{!! $leftCategory->description !!}</p>
-                            <p>{{ $leftCategory->getProducts()->count() }} items</p>
-                            <a href="{{ $leftCategory->path() }}">Shop now</a>
+                            <h1>{{ $leftBanner->title }}</h1>
+                            <p>{!! $leftBanner->description !!}</p>
+                            <a href="{{ $leftBanner->url }}">Shop now</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
-                        @foreach($rightCategories as $rightCategory)
+                        @foreach($rightBanners as $rightBanner)
                         <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                            <div class="categories__item set-bg" data-setbg="{{ $rightCategory->image }}">
+                            <div class="categories__item set-bg" data-setbg="{{ $rightBanner->image }}">
                                 <div class="categories__text">
-                                    <h4>{{ $rightCategory->title }}</h4>
-                                    <p>{!! $rightCategory->description !!}</p>
-                                    <p>{{ $rightCategory->getProducts()->count() }} items</p>
-                                    <a href="{{ $rightCategory->path() }}">Shop now</a>
+                                    <h4>{{ $rightBanner->title }}</h4>
+                                    <p>{!! $rightBanner->description !!}</p>
+                                    <a href="{{ $rightBanner->url }}">Shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +66,7 @@
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="c">{{ $newProduct->title }}</a></h6>
+                            <h6><a href="{{ $newProduct->path() }}">{{ $newProduct->title }}</a></h6>
                             @if($newProduct->getProductRate() != 0)
                                 <div class="rating">
                                     @for($i=1; $i<=$newProduct->getProductRate() ; $i++)
@@ -80,9 +78,9 @@
                                 </div>
                             @else
                                 <div class="rating">
-                                    @for($i=1;$i<=5;$i++)
+                                    {{--@for($i=1;$i<=5;$i++)
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    @endfor
+                                    @endfor--}}
                                 </div>
                             @endif
                             <div class="product__price">
@@ -135,13 +133,22 @@
                             </div>
                             <div class="trend__item__text">
                                 <h6><a href="{{ $hotTrendProduct->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $hotTrendProduct->title }}</a></h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
+                                @if($hotTrendProduct->getProductRate() != 0)
+                                    <div class="rating">
+                                        @for($i=1; $i<=$hotTrendProduct->getProductRate() ; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                        @for($i=5; $i > $hotTrendProduct->getProductRate(); $i--)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @else
+                                    <div class="rating">
+                                        @for($i=1;$i<=5;$i++)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @endif
                                 <div class="product__price">
                                     $ {{ $hotTrendProduct->discount == 0 ? $hotTrendProduct->price : $hotTrendProduct->price - ( $hotTrendProduct->price * $hotTrendProduct->discount ) / 100  }}
                                 </div>
@@ -162,13 +169,22 @@
                             </div>
                             <div class="trend__item__text">
                                 <h6><a href="{{ $bestSellerProducts->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $bestSellerProducts->title }}</a></h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
+                                @if($bestSellerProducts->getProductRate() != 0)
+                                    <div class="rating">
+                                        @for($i=1; $i<=$bestSellerProducts->getProductRate() ; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                        @for($i=5; $i > $bestSellerProducts->getProductRate(); $i--)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @else
+                                    <div class="rating">
+                                        @for($i=1;$i<=5;$i++)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @endif
                                 <div class="product__price">
                                     $ {{ $bestSellerProducts->discount == 0 ? $bestSellerProducts->price : $bestSellerProducts->price - ( $bestSellerProducts->price * $bestSellerProducts->discount ) / 100  }}
                                 </div>
@@ -189,13 +205,22 @@
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="{{ $topOfferProduct->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $topOfferProduct->title }}</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
+                                    @if($topOfferProduct->getProductRate() != 0)
+                                        <div class="rating">
+                                            @for($i=1; $i<=$topOfferProduct->getProductRate() ; $i++)
+                                                <i class="fa fa-star"></i>
+                                            @endfor
+                                            @for($i=5; $i > $topOfferProduct->getProductRate(); $i--)
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            @endfor
+                                        </div>
+                                    @else
+                                        <div class="rating">
+                                            @for($i=1;$i<=5;$i++)
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            @endfor
+                                        </div>
+                                    @endif
                                     <div class="product__price">
                                         $ {{ $topOfferProduct->discount == 0 ? $topOfferProduct->price : $topOfferProduct->price - ( $topOfferProduct->price * $topOfferProduct->discount ) / 100  }}
                                     </div>

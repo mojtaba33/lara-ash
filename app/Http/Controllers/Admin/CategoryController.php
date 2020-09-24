@@ -42,20 +42,11 @@ class CategoryController extends AdminController
         $request->validate([
             'parent_id' => 'required',
             'title' => 'required',
-            'image' => 'image',
         ]);
-
-        $image = null;
-        if ($request->file('image'))
-            $image =$this->uploadImage($request->file('image'),'upload/images/category');
 
         Category::create([
             'parent_id' => $request->input('parent_id'),
             'title' => $request->input('title'),
-            'image' => $image,
-            'description' => $request->input('description'),
-            'position' => $request->input('position'),
-            'show' => $request->input('show') == 'on' ? true : false ,
         ]);
 
         return back()->with(['message' => 'عملیات با موفقیت انجام شد.']);
@@ -96,25 +87,11 @@ class CategoryController extends AdminController
         $request->validate([
             'parent_id' => 'required',
             'title' => 'required',
-            'image' => 'image',
         ]);
-
-        if ($request->file('image')) {
-
-            if ($category->image != null)
-                if (file_exists(public_path($category->image)))
-                    unlink(public_path($category->image));
-
-            $image = $this->uploadImage($request->file('image'),'upload/images/category');
-            $category->update(['image' => $image]);
-        }
 
         $category->update([
             'parent_id' => $request->input('parent_id'),
             'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'position' => $request->input('position'),
-            'show' => $request->input('show') == 'on' ? true : false ,
         ]);
 
         return back()->with(['message' => 'عملیات با موفقیت انجام شد.']);
@@ -131,19 +108,11 @@ class CategoryController extends AdminController
     {
         $category->delete();
 
-        if ($category->image != null)
-            if (file_exists(public_path($category->image)))
-                unlink(public_path($category->image));
-
         if ($category->parent_id == 0)
             foreach ($category->children()->get() as $child)
             {
                 $child->delete();
             }
-
-        if ($category->image != null)
-            if (file_exists(public_path($category->image)))
-                unlink(public_path($category->image));
 
         return back()->with(['message' => 'عملیات با موفقیت انجام شد.']);
     }

@@ -38,6 +38,18 @@
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon-cogs"></i>
+                    <span>بنر ها</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="{{ route('banner.index') }}">لیست بنر ها</a></li>
+                    <li><a class="" href="{{ route('banner.create') }}">افزودن بنر</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;" class="">
+                    <i class="icon-cogs"></i>
                     <span> محصولات </span>
                     <span class="arrow"></span>
                 </a>

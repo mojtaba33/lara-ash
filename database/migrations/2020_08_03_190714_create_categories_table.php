@@ -18,10 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->bigInteger('parent_id')->default(0);
             $table->string('title');
             $table->string('slug');
-            $table->string('image')->nullable();
+            /*$table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->boolean('show')->default(0);
-            $table->enum('position',['left','right',null])->nullable()->default(null);
+            $table->enum('position',['left','right',null])->nullable()->default(null);*/
             $table->timestamps();
         });
     }

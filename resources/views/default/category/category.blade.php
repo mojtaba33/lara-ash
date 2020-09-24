@@ -127,8 +127,8 @@
                                 <div class="product__item__pic set-bg" data-setbg="{{ url($product->image[360]) }}">
                                     <ul class="product__hover">
                                         <li><a href="{{ url($product->image['original']) }}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        <li><a href="{{ route('add.to.fav',$product) }}"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="{{ $product->path() }}"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

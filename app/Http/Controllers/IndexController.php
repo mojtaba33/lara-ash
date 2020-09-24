@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Category;
 use App\Product;
 use App\Slider;
@@ -11,8 +12,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $leftCategory = Category::where('parent_id',0)->where('show',1)->where('position' , 'left')->first();
-        $rightCategories = Category::where('parent_id',0)->where('show',1)->where('position' , 'right')->take(4)->get();
+        $leftBanner = Banner::where('show',1)->where('position' , 'left')->first();
+        $rightBanners = Banner::where('show',1)->where('position' , 'right')->take(4)->get();
 
         $categories = Category::where('parent_id',0)->get();
 
@@ -23,7 +24,7 @@ class IndexController extends Controller
 
         $sliders = Slider::all();
         return view('default.index',compact(
-            'leftCategory','rightCategories',
+            'leftBanner','rightBanners',
             'sliders','categories','newProducts','hotTrendProducts',
             'bestSellerProducts','topOfferProducts'
         ));

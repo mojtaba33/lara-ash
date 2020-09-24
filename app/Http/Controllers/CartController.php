@@ -24,8 +24,8 @@ class CartController extends Controller
     {
         if (!auth()->check() || !auth()->user()->checkouts()->pluck('payment')->contains(0)){
             return response([
-                'fullPrice' => 0,
-                'fullCount' => 0,
+                'totalPrice' => 0,
+                'totalCount' => 0,
             ]);
         }
 

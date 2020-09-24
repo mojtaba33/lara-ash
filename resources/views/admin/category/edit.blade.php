@@ -38,52 +38,6 @@
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input id="show" type="checkbox" name="show" {{ $category->show ? 'checked' : '' }}>
-                                            نمایش در صفحه ی اصلی
-                                        </label>
-                                        @error('show')
-                                        <label for="title" class="error">{{ $message }}</label>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="holder_input" style="margin-bottom: 30px;">
-
-                                <div class="form-group ">
-                                    <label for="image" class="control-label col-lg-2">تصویر</label>
-                                    <div class="col-lg-10">
-                                        <input id="image" name="image" type="file" value="{{$category->image}}" class="form-control @error('image') error @enderror" />
-                                        @error('image')
-                                        <label for="image" class="error">{{ $message }}</label>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-lg-2" for="position">مکان</label>
-                                    <div class="col-lg-10">
-                                        <select class="form-control m-bot15" name="position" id="position" disabled>
-                                            <option value="left" {{ $category->position == 'left' ? 'selected' : '' }}>عکس بزرگ سمت چپ صفحه ی اصلی</option>
-                                            <option value="right" {{ $category->position == 'right' ? 'selected' : '' }}>عکس های سمت راست صفحه ی اصلی</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="description" class="control-label col-lg-2">توضیحات</label>
-                                    <div class="col-lg-10">
-
-                                        <ck-editor :tag_name="{{ json_encode('description') }}" :value="{{ json_encode( $category->description ) }}" ></ck-editor>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
                                     <button class="btn btn-danger" type="submit">ثبت</button>
                                     <button class="btn btn-default" type="reset">انصراف</button>
                                 </div>

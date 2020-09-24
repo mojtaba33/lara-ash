@@ -6,9 +6,12 @@
             <x-admin-alert message="message" status="عملیات موفق" type="success" ></x-admin-alert>
 
             @if($products->isNotEmpty())
-                <section class="panel">
-                    <header class="panel-heading">
+                <section class="panel" >
+                    <header class="panel-heading" style="display: flex;justify-content: space-between">
                         {{ __(' لیست محصولات  ') }}
+                        <form action="" >
+                            <input type="text" name="item" class="form-control search" placeholder="Search">
+                        </form>
                     </header>
                     <table class="table table-striped table-advance table-hover">
                         <thead>
