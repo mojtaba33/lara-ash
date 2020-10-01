@@ -93,6 +93,16 @@ Created: Colorib
         autoplay: true
     });
 
+    $(".sale_off").owlCarousel({
+        //loop: true,
+        margin: 10,
+        items: 4,
+        dots: true,
+        //smartSpeed: 1200,
+        autoHeight: false,
+        //autoplay: true
+    });
+
     /*--------------------------
         Product Details Slider
     ----------------------------*/
@@ -166,8 +176,17 @@ Created: Colorib
 
     /* var timerdate = "2020/12/30" */
 
-	$("#countdown-time").countdown(timerdate, function(event) {
-        $(this).html(event.strftime("<div class='countdown__item'><span>%D</span> <p>Day</p> </div>" + "<div class='countdown__item'><span>%H</span> <p>Hour</p> </div>" + "<div class='countdown__item'><span>%M</span> <p>Min</p> </div>" + "<div class='countdown__item'><span>%S</span> <p>Sec</p> </div>"));
+	$(".countdown-time").countdown(timerdate, function(event) {
+        $(this).html(event.strftime("" +
+            /*"<div class='countdown__item'>" +
+            "<span style='font-size: 14px'>%D</span>" +
+            " <p>Day</p> </div>" + */
+            "<div class='countdown__item'>" +
+            "<span style='font-size: 14px'>%H</span>" +
+            " <p>Hour</p> </div>" + "<div class='countdown__item'>" +
+            "<span style='font-size: 14px'>%M</span> <p>Min</p> </div>" + "<div class='countdown__item'>" +
+            "<span style='font-size: 14px'>%S</span> <p>Sec</p> " +
+            "</div>"));
     });
 
     /*-------------------

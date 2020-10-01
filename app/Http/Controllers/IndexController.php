@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Category;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Product;
+use App\Service;
 use App\Slider;
 use Illuminate\Http\Request;
 
@@ -17,16 +19,20 @@ class IndexController extends Controller
 
         $categories = Category::where('parent_id',0)->get();
 
+        $topOfferProducts = Product::where('top_offer',1)->latest()->get();
+
         $newProducts = Product::latest()->take(8)->get();
         $hotTrendProducts = Product::latest('rate')->take(3)->get();
         $bestSellerProducts = Product::latest('sell_count')->take(3)->get();
-        $topOfferProducts = Product::where('top_offer',1)->latest()->take(3)->get();
+        $features = Product::where('top_offer',1)->latest()->take(3)->get();
+
+        $services = Service::take(4)->get();
 
         $sliders = Slider::all();
         return view('default.index',compact(
             'leftBanner','rightBanners',
             'sliders','categories','newProducts','hotTrendProducts',
-            'bestSellerProducts','topOfferProducts'
+            'bestSellerProducts','topOfferProducts','features','services'
         ));
     }
 

@@ -40,12 +40,14 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['a
 
     Route::get('product/{product}/option','ProductController@option')->name('product.option');
     Route::post('product/{product}/add/option','ProductController@addOption')->name('product.addOption');
+    Route::get('product/topOffer','ProductController@topOffers')->name('product.topOffer');
     Route::resource('product' , 'ProductController');
     Route::get('product-image/{product:slug}' , 'GalleryController@gallery')->name('product.gallery');
     Route::post('product-image/{product}' , 'GalleryController@addImageToGallery')->name('product.store.gallery');
     Route::delete('product-image/{gallery}' , 'GalleryController@destroy')->name('product.destroy.gallery');
 
     Route::resource('slider','SliderController');
+    Route::resource('service','ServiceController');
 
     Route::get('comment/approved','CommentController@approved')->name('comment.approved');
     Route::get('comment/unapproved','CommentController@unapproved')->name('comment.unapproved');

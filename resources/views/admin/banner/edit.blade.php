@@ -7,7 +7,7 @@
 
             <section class="panel">
                 <header class="panel-heading">
-                    {{ __('   ویرایش دسته بندی  ' . $banner->title ) }}
+                    {{ __('   ویرایش بنر  ' . $banner->title ) }}
                 </header>
                 <div class="panel-body">
                     <div class="form">

@@ -39,7 +39,7 @@ class BannerController extends AdminController
         $request->validate([
             'title' => 'required',
             'url' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
         ]);
 
         $image =$this->uploadImage($request->file('image'),'upload/images/banner');

@@ -1,6 +1,6 @@
 
 <!-- Instagram Begin -->
-<div class="instagram">
+{{--<div class="instagram">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
@@ -53,11 +53,11 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 <!-- Instagram End -->
 </div>
 <!-- Footer Section Begin -->
-<footer class="footer">
+<footer class="footer" style="background-color: #eee;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-7">

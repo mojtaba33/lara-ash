@@ -56,6 +56,7 @@
                 <ul class="sub">
                     <li><a class="" href="{{ route('product.index') }}">لیست محصولات</a></li>
                     <li><a class="" href="{{ route('product.create') }}">افزودن محصول جدید</a></li>
+                    <li><a class="" href="{{ route('product.topOffer') }}">لیست محصولات ویژه</a></li>
                 </ul>
             </li>
 
@@ -92,6 +93,18 @@
                 <ul class="sub">
                     <li><a class="" href="{{ route('slider.index') }}">لیست اسلاید ها</a></li>
                     <li><a class="" href="{{ route('slider.create') }}">افزودن اسلاید جدید</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;" class="">
+                    <i class="icon-cogs"></i>
+                    <span> خدمات </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="{{ route('service.index') }}">لیست خدمات ها</a></li>
+                    <li><a class="" href="{{ route('service.create') }}">افزودن خدمات جدید</a></li>
                 </ul>
             </li>
 

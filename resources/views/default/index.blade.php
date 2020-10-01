@@ -34,6 +34,78 @@
     </section>
     <!-- Categories Section End -->
 
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>SALE OFF PRODUCTS</h5>
+                </div>
+            </div>
+
+            <div class="sale_off owl-carousel">
+                @foreach($topOfferProducts as $topOfferProduct)
+                    <div class="">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="{{ url($topOfferProduct->image[360]) }}">
+                                <ul class="product__hover">
+                                    <li><a href="{{ url($topOfferProduct->image['original']) }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li><a href="{{ route('add.to.fav',$topOfferProduct) }}"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="{{ $topOfferProduct->path() }}"><span class="icon_bag_alt"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="{{ $topOfferProduct->path() }}">{{ $topOfferProduct->title }}</a></h6>
+
+                                @if($topOfferProduct->getProductRate() != 0)
+                                    <div class="rating">
+                                        @for($i=1; $i<=$topOfferProduct->getProductRate() ; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                        @for($i=5; $i > $topOfferProduct->getProductRate(); $i--)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @else
+                                    <div class="rating">
+                                        @for($i=1;$i<=5;$i++)
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        @endfor
+                                    </div>
+                                @endif
+                                <div class="product__price">
+                                    $ {{ $topOfferProduct->discount == 0 ? $topOfferProduct->price : $topOfferProduct->price - ( $topOfferProduct->price * $topOfferProduct->discount ) / 100  }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="discount__countdown countdown-time">
+                            {{--<div class="countdown__item">
+                                <span style="font-size: 14px">22</span>
+                                <p>Days</p>
+                            </div>--}}
+                            <div class="countdown__item">
+                                <span style="font-size: 14px">2</span>
+                                <p>Hour</p>
+                            </div>
+                            <div class="countdown__item">
+                                <span style="font-size: 14px">00</span>
+                                <p>Min</p>
+                            </div>
+                            <div class="countdown__item">
+                                <span style="font-size: 14px">60</span>
+                                <p>Sec</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+
+
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -198,19 +270,19 @@
                         <div class="section-title">
                             <h4>Feature</h4>
                         </div>
-                        @foreach($topOfferProducts as $topOfferProduct)
+                        @foreach($features as $feature)
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="{{ url($topOfferProduct->image[90]) }}" alt="">
+                                    <img src="{{ url($feature->image[90]) }}" alt="">
                                 </div>
                                 <div class="trend__item__text">
-                                    <h6><a href="{{ $topOfferProduct->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $topOfferProduct->title }}</a></h6>
-                                    @if($topOfferProduct->getProductRate() != 0)
+                                    <h6><a href="{{ $feature->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $feature->title }}</a></h6>
+                                    @if($feature->getProductRate() != 0)
                                         <div class="rating">
-                                            @for($i=1; $i<=$topOfferProduct->getProductRate() ; $i++)
+                                            @for($i=1; $i<=$feature->getProductRate() ; $i++)
                                                 <i class="fa fa-star"></i>
                                             @endfor
-                                            @for($i=5; $i > $topOfferProduct->getProductRate(); $i--)
+                                            @for($i=5; $i > $feature->getProductRate(); $i--)
                                                 <i class="fa fa-star-o" aria-hidden="true"></i>
                                             @endfor
                                         </div>
@@ -222,7 +294,7 @@
                                         </div>
                                     @endif
                                     <div class="product__price">
-                                        $ {{ $topOfferProduct->discount == 0 ? $topOfferProduct->price : $topOfferProduct->price - ( $topOfferProduct->price * $topOfferProduct->discount ) / 100  }}
+                                        $ {{ $feature->discount == 0 ? $feature->price : $feature->price - ( $feature->price * $feature->discount ) / 100  }}
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +307,7 @@
     <!-- Trend Section End -->
 
     <!-- Discount Section Begin -->
-    <section class="discount">
+    {{--<section class="discount">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 p-0">
@@ -273,41 +345,23 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
     <!-- Discount Section End -->
 
     <!-- Services Section Begin -->
     <section class="services spad">
         <div class="container">
             <div class="row">
+                @foreach($services as $service)
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="services__item">
-                        <i class="fa fa-car"></i>
-                        <h6>Free Shipping</h6>
-                        <p>For all oder over $99</p>
+                        {{--<i class="fa fa-car"></i>--}}
+                        <img src="{{ url($service->image) }}" style="position: absolute;left: 0;top: 4px;height:30px">
+                        <h6>{{ $service->title }}</h6>
+                        <p>{{ $service->label }}</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-money"></i>
-                        <h6>Money Back Guarantee</h6>
-                        <p>If good have Problems</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-support"></i>
-                        <h6>Online Support 24/7</h6>
-                        <p>Dedicated support</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-headphones"></i>
-                        <h6>Payment Secure</h6>
-                        <p>100% secure payment</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

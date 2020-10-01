@@ -179,6 +179,12 @@ class ProductController extends AdminController
         return back()->with(['message' => 'عملیات با موفقیت انجام شد.']);
     }
 
+    public function topOffers()
+    {
+        $products = Product::search()->where('top_offer', 1)->latest()->paginate(20)->withQueryString();
+        return view('admin.product.index' , compact('products'));
+    }
+
     public function option(Product $product)
     {
         $filters = $product->category()->first()->filters()->where('parent_id',0)->get();
