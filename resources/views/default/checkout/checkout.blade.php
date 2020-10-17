@@ -152,7 +152,7 @@
                                 <span class="checkmark"></span>
                             </label>
                         </div>--}}
-                        <form action="{{ url('payment') }}" method="post">
+                        <form action="{{ route('payment','Zarinpal') }}" method="post">
                             @csrf
                             <button type="submit" class="site-btn">Place oder</button>
                         </form>

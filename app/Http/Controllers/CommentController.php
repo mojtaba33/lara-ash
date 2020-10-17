@@ -28,9 +28,6 @@ class CommentController extends Controller
             'rate' => $request->input('rate') != null ? $request->input('rate') : 0 ,
         ]);
 
-
-        //auth()->user()->comments()->create(\request()->all());
-
         return back()->with('message','Your review has been successfully registered');
     }
 }

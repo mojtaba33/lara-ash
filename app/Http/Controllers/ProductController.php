@@ -23,7 +23,6 @@ class ProductController extends Controller
             ->latest()
             ->paginate(20)->withQueryString();
 
-        //dd($product->comments);
         return view('default.product.single',compact('product','comments','relatedProducts'));
     }
 }

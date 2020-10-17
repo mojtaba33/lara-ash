@@ -92,8 +92,9 @@ Route::post('fav/add/','FavouriteController@addAjax')->name('add.to.fav.ajax');
 Route::get('fav/add/{product}','FavouriteController@add')->name('add.to.fav')->middleware('verified');
 Route::delete('fav/delete/{product}','FavouriteController@destroy')->name('delete.fav')->middleware('verified');
 
-Route::post('payment', 'CartController@payment')->middleware('verified');
-Route::get('payment/checker', 'CartController@checker');
+// {payment} == payment class name ex:Zarinpal , Myclass
+Route::post('payment/{payment}', 'PaymentController@payment')->middleware('verified')->name('payment');
+Route::get('payment/checker/{payment}', 'PaymentController@checker')->name('callback.payment');
 
 Route::get('user/profile', 'UserController@profile')->name('user.profile')->middleware('verified');
 Route::patch('user/profile', 'UserController@update')->name('user.profile.update')->middleware('verified');
