@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Checkout;
-use App\Http\Repositories\contract\CheckoutContract;
 use App\Http\Resources\CartCollection;
 use App\Product;
 use Illuminate\Http\Request;

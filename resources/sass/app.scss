@@ -1,8 +1,18 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+//@import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
+
+@import './css/bootstrap.min.css';
+@import './css/font-awesome.min.css';
+@import './css/elegant-icons.css';
+@import './css/jquery-ui.min.css';
+@import './css/magnific-popup.css';
+@import './css/owl.carousel.min.css';
+@import './css/slicknav.min.css';
+@import './css/style.css';
+@import './css/iziToast.min.css';

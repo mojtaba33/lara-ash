@@ -91,12 +91,10 @@
 </div>
 
 <!-- Search End -->
-
 <!-- Js Plugins -->
+
 <script src="/js/app.js"></script>
 
-<script src="/default/js/jquery-3.3.1.min.js"></script>
-<script src="/default/js/bootstrap.min.js"></script>
 <script src="/default/js/jquery.magnific-popup.min.js"></script>
 <script src="/default/js/jquery-ui.min.js"></script>
 <script src="/default/js/mixitup.min.js"></script>

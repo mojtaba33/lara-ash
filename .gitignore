@@ -1,5 +1,10 @@
 /node_modules
 /@@@@@@@@@@
+/resources/js/js
+/resources/sass/css
+/resources/sass/sass
+/resources/sass/fonts
+/resources/sass/img
 /.idea
 /public/hot
 /public/storage

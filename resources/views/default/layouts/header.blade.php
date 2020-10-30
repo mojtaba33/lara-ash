@@ -10,22 +10,12 @@
     <title>Ashion | Template</title>
 
     <!-- Google Font -->
-    <link href="/default/https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="/default/https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="/default/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/default/css/iziToast.min.css">
-
-
+    <link rel="stylesheet" href="/css/app.css" type="text/css">
     @stack('styles')
 </head>
 

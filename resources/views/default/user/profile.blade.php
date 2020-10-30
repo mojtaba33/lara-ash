@@ -115,9 +115,9 @@
                                         <td>{{ $pay->name }}</td>
                                         <td>{{ $pay->lastName }}</td>
                                         <td>{{ $pay->phone }}</td>
+                                        <td>{{ auth()->user()->email }}</td>
+                                        <td>{{ $pay->address }}</td>
                                         <td>{{ $pay->postCode }}</td>
-                                        <td>{{ $pay->count }}</td>
-                                        <td>{{ $pay->count }}</td>
                                         <td>
                                             @if($pay->deliver==0)
                                                 <button class="btn btn-sm btn-primary">{{ __('on the way') }}</button>
