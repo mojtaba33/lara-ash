@@ -77,7 +77,7 @@ Route::post('/comment/add', 'CommentController@store')->name('add.comment')->mid
 Route::get('category/','CategoryController@index')->name('category.all');
 Route::get('category/{category:slug}','CategoryController@single')->name('category.single');
 
-Route::get('checkout','CartController@checkout')->name('checkout.index');
+Route::get('checkout','CheckoutController@index')->name('checkout.index');
 
 Route::prefix('cart')->group(function (){
     Route::post('/{product}','CartController@add')->name('add.to.cart');
@@ -85,7 +85,7 @@ Route::prefix('cart')->group(function (){
     Route::delete('/delete','CartController@delete')->name('delete.cart');
     Route::put('/update','CartController@update')->name('update.cart');
     Route::get('/','CartController@index')->name('cart.index');
-    Route::patch('/address/{checkout}','CartController@address')->name('cart.address');
+    Route::patch('/address/{checkout}','CheckoutController@address')->name('cart.address');
 });
 
 Route::post('fav/add/','FavouriteController@addAjax')->name('add.to.fav.ajax');

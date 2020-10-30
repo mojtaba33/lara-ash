@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Checkout;
+use App\Http\Repositories\contract\CheckoutContract;
 use App\Http\Resources\CartCollection;
 use App\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-
-
     public function index()
     {
         return view('default.cart.cart');
@@ -19,7 +18,7 @@ class CartController extends Controller
 
     public function get()
     {
-        if (!auth()->check() || !auth()->user()->checkouts()->pluck('payment')->contains(0)){
+        if (!auth()->check() || ! auth()->user()->checkouts()->pluck('payment')->contains(0) ){
             return response([
                 'totalPrice' => 0,
                 'totalCount' => 0,
@@ -27,6 +26,7 @@ class CartController extends Controller
         }
 
         $checkout = auth()->user()->checkouts()->where('payment',0)->first();
+
         $carts = response([
             'data'      => new CartCollection( $checkout->carts()->get() ),
             'totalPrice' => $this->getTotalPrice( $checkout ),
@@ -67,61 +67,38 @@ class CartController extends Controller
             return \response()->json(['title' => 'warning','message' => 'something went wrong!','color'=>'yellow']);
         }
 
-        if (!auth()->user()->checkouts()->pluck('payment')->contains(0)){ //if checkout record not exist
-            if($product->count < $count){
-                return response(['title'   => 'warning','message' => 'The quantity is more than inventory!','color'   => 'yellow']);
-            }
+        if($product->count < $count){
+            return response(['title'   => 'warning','message' => 'The quantity is more than inventory!','color'   => 'yellow']);
+        }
 
-            auth()->user()->checkouts()->create([
-                'price' => null,
-                'count' => $count,
-            ])->carts()->create([
-                'count' => $count,
-                'color' => $color,
-                'size'  => $size,
-                'product_id' => $product->id,
-            ]);
+        // Retrieve by payment and resnumber, or instantiate with the payment and count attributes...
+        // find or create checkout model where payment = 0 , resnumber = null
+        $checkout = auth()->user()->checkouts()->firstOrNew(
+            ['payment' => 0 , 'resnumber' => null],
+            ['count'   => 0]
+        );
+        $checkout->save();
 
-            return response(['title'   => 'success','message' => 'done!','color'   => 'green']);
-        }else{
-            $checkout_id = auth()->user()->checkouts()->where('payment',0)->first()->id;
-            if(
-                Cart::where('checkout_id',$checkout_id)->where('product_id',$product->id)
-                ->where('color',$color)->where('size',$size)->first()
-            ){
-                $productCount = Cart::where('checkout_id',$checkout_id)->where('product_id',$product->id)->sum('count');
-
-                if($product->count < $count + $productCount){
-                    return response(['title'   => 'warning','message' => 'The quantity is more than inventory!','color'   => 'yellow']);
-                }
-
-                Cart::where('checkout_id',$checkout_id)
-                    ->where('product_id',$product->id)->where('color',$color)->where('size',$size)
-                    ->increment('count',$count);
-
-                auth()->user()->checkouts()->where('payment',0)->increment('count',$count);
-
-                return response(['title'   => 'success','message' => 'done!','color'   => 'green']);
-
-            }else{
-                $productCount = Cart::where('checkout_id',$checkout_id)->where('product_id',$product->id)->sum('count');
-                if($product->count < $count + $productCount){
-                    return response(['title'   => 'warning','message' => 'The quantity is more than inventory!','color'   => 'yellow']);
-                }
-
-                auth()->user()->checkouts()->where('payment',0)->first()->carts()->create([
-                    'count'      => $count,
+        // find or create cart model product details
+        $cart = $checkout->carts()->where('product_id',$product->id)
+                ->where('color',$color)->where('size',$size)->firstOrNew([
+                    /*'count'      => $count,*/
                     'color'      => $color,
                     'size'       => $size,
                     'product_id' => $product->id,
                 ]);
 
-                auth()->user()->checkouts()->where('payment',0)->increment('count',$count);
-
-                return response(['title'   => 'success','message' => 'done!','color'   => 'green']);
-
-            }
+        // check if quantity is more than inventory
+        $productCount = Cart::where('checkout_id',$checkout->id)->where('product_id',$product->id)->sum('count');
+        if($product->count < $count + $productCount){
+            return response(['title'   => 'warning','message' => 'The quantity is more than inventory!','color'   => 'yellow']);
         }
+        // create cart and increase quantity
+        $cart->save();
+        $checkout->increment('count',$count);
+        $cart->increment('count',$count);
+
+        return response(['title'   => 'success','message' => 'done!','color'   => 'green']);
     }
 
     public function update(Request $request)
@@ -152,35 +129,6 @@ class CartController extends Controller
         }
 
         return $totalPrice;
-    }
-
-    public function address(Checkout $checkout , Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'lastName' => 'required',
-            'address' => 'required',
-            'phone' => 'required|numeric',
-            'postCode' => 'required|numeric',
-        ]);
-
-        $checkout->update([
-            'name' => $request->input('name'),
-            'lastName' => $request->input('lastName'),
-            'address' => $request->input('address'),
-            'phone' => $request->input('phone'),
-            'postCode' => $request->input('postCode'),
-        ]);
-
-        return back()->with('message' , 'Your information has been successfully registered.');
-    }
-
-    public function checkout()
-    {
-        $checkout = auth()->user()->checkouts()->where('payment',0)->first();
-        $carts = $checkout->carts()->get();
-        $totalPrice = $this->getTotalPrice($checkout);
-        return view('default.checkout.checkout',compact('checkout','carts','totalPrice'));
     }
 
 }
