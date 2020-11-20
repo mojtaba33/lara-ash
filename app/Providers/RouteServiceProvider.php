@@ -31,8 +31,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::bind('payment', function ($value) {
-            $class = 'App\Http\Controllers\Payment\\'.$value;
-            return new $class();
+            app()->bind('App\Http\Controllers\Payment\PaymentInterface','App\Http\Controllers\Payment\\'.$value);
         });
 
         parent::boot();

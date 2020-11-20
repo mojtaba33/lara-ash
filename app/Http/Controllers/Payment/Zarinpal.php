@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Payment;
 
+use App\Notifications\Paid;
+use Illuminate\Support\Facades\Notification;
 use SoapClient;
 
 class Zarinpal extends PaymentInterface
@@ -71,6 +73,8 @@ class Zarinpal extends PaymentInterface
                     'payment' => 1 ,
                     'price' => $totalPrice ,
                 ]);
+
+                Notification::send(auth()->user() , new Paid($checkout,$result->RefID));
 
                 echo 'Transaction success. RefID:'.$result->RefID;
             } else {
