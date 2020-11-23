@@ -125,43 +125,45 @@
                 </div>
             </div>
             <div class="row property__gallery">
-                @foreach($newProducts as $newProduct)
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $newProduct->category->parent->slug }}">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{{ url($newProduct->image[360]) }}">
-                            <ul class="product__hover">
-                                <li><a href="{{ url($newProduct->image['original']) }}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li>
-                                    <a href="{{ route('add.to.fav',$newProduct) }}"><span class="icon_heart_alt"></span></a>
-                                </li>
-                                <li><a href="{{ $newProduct->path() }}"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="{{ $newProduct->path() }}">{{ $newProduct->title }}</a></h6>
-                            @if($newProduct->getProductRate() != 0)
-                                <div class="rating">
-                                    @for($i=1; $i<=$newProduct->getProductRate() ; $i++)
-                                        <i class="fa fa-star"></i>
-                                    @endfor
-                                    @for($i=5; $i > $newProduct->getProductRate(); $i--)
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    @endfor
+                @foreach($categories as $category)
+                    @foreach($category->products()->latest()->take(4)->get() as $newProduct)
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $category->slug }}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{ url($newProduct->image[360]) }}">
+                                    <ul class="product__hover">
+                                        <li><a href="{{ url($newProduct->image['original']) }}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li>
+                                            <a href="{{ route('add.to.fav',$newProduct) }}"><span class="icon_heart_alt"></span></a>
+                                        </li>
+                                        <li><a href="{{ $newProduct->path() }}"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
                                 </div>
-                            @else
-                                <div class="rating">
-                                    {{--@for($i=1;$i<=5;$i++)
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    @endfor--}}
+                                <div class="product__item__text">
+                                    <h6><a href="{{ $newProduct->path() }}">{{ $newProduct->title }}</a></h6>
+                                    @if($newProduct->getProductRate() != 0)
+                                        <div class="rating">
+                                            @for($i=1; $i<=$newProduct->getProductRate() ; $i++)
+                                                <i class="fa fa-star"></i>
+                                            @endfor
+                                            @for($i=5; $i > $newProduct->getProductRate(); $i--)
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            @endfor
+                                        </div>
+                                    @else
+                                        <div class="rating">
+                                            {{--@for($i=1;$i<=5;$i++)
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            @endfor--}}
+                                        </div>
+                                    @endif
+                                    <div class="product__price">
+                                        $ {{ $newProduct->discount == 0 ? $newProduct->price : $newProduct->price - ( $newProduct->price * $newProduct->discount ) / 100  }}
+                                    </div>
                                 </div>
-                            @endif
-                            <div class="product__price">
-                                $ {{ $newProduct->discount == 0 ? $newProduct->price : $newProduct->price - ( $newProduct->price * $newProduct->discount ) / 100  }}
                             </div>
                         </div>
-                    </div>
-                </div>
-            @endforeach
+                    @endforeach
+                @endforeach
             </div>
         </div>
     </section>

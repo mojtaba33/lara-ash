@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Product;
 use App\Service;
 use App\Slider;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -17,11 +18,9 @@ class IndexController extends Controller
         $leftBanner = Banner::where('show',1)->where('position' , 'left')->first();
         $rightBanners = Banner::where('show',1)->where('position' , 'right')->take(4)->get();
 
-        $categories = Category::latest()->where('parent_id',0)->take(4)->get();
-
+        $categories = Category::latest()->where('parent_id','<>',0)->take(4)->get();
         $topOfferProducts = Product::where('top_offer',1)->latest()->get();
 
-        $newProducts = Product::latest()->take(8)->get();
         $hotTrendProducts = Product::latest('rate')->take(3)->get();
         $bestSellerProducts = Product::latest('sell_count')->take(3)->get();
         $features = Product::where('top_offer',1)->latest()->take(3)->get();
@@ -31,7 +30,7 @@ class IndexController extends Controller
         $sliders = Slider::all();
         return view('default.index',compact(
             'leftBanner','rightBanners',
-            'sliders','categories','newProducts','hotTrendProducts',
+            'sliders','categories','hotTrendProducts',
             'bestSellerProducts','topOfferProducts','features','services'
         ));
     }
