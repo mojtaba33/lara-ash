@@ -15,6 +15,8 @@ class BlogSeeder extends Seeder
      */
     public function run()
     {
+        Blog::truncate();
+
         Category::factory()
             ->has(Category::factory()
                 ->has(Blog::factory()

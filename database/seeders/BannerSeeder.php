@@ -14,6 +14,8 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
+        Banner::truncate();
+
         Banner::factory()->create([
             'title' => 'Women’s fashion',
             'url' => 'google.com',

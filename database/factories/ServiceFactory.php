@@ -24,7 +24,7 @@ class ServiceFactory extends Factory
         return [
             'title' => $this->faker->name,
             'label' => $this->faker->name,
-            'url'   => 'upload/faker/90.jpg'
+            'image'   => 'upload/faker/90.jpg'
         ];
     }
 }

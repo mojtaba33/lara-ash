@@ -29,7 +29,7 @@ class BlogFactory extends Factory
             'image'       => 'upload/faker/blog.jpg',
             'title'       => $this->faker->name,
             'body'        => $this->faker->text($maxNbChars = 1000),
-            'tags'        => implode($this->faker->words($nb = 3, $asText = false),',')
+            'tags'        => implode(',',$this->faker->words($nb = 3, $asText = false))
         ];
     }
 }

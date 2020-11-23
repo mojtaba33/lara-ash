@@ -16,6 +16,10 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        Product::truncate();
+        Category::truncate();
+        Gallery::truncate();
+
         Category::factory()
             ->has(Category::factory()
                 ->has(Product::factory()
