@@ -3,10 +3,13 @@
 namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'category_id' , 'user_id' , 'title','image','slug',
         'brand','body','color','size','price',
@@ -138,13 +141,6 @@ class Product extends Model
         {
             $query->where('title','like','%'. request('item') .'%');
         }
-        /*if (\request()->input('size') != null){
-            $size = \request()->input('size');
-            foreach ($size as $item)
-            {
-                $query->where('size','LIKE',"%'".$item."'%");
-            }
-        }*/
         return $query;
     }
 

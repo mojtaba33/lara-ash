@@ -10,9 +10,8 @@
     <title>Ashion | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
+    {{--<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">--}}
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/app.css" type="text/css">
@@ -75,9 +74,7 @@
                             @endif
                         </li>
                         @endforeach
-                        <li><a href="./shop.html">Shop</a></li>
                         <li><a href="{{ route('blog.all') }}">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>

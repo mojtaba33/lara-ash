@@ -132,18 +132,10 @@
                     .delete('/cart/delete',{
                         params: { id : id }
                     })
-                    .then(function (response) {
-                        //alert(response.data)
-                        /*iziToast.show({
-                            title: 'success',
-                            message: 'done!',
-                            rtl: false,
-                            color: 'green',
-                        });*/
+                    .then(function () {
                         obj.getCarts();
                     })
                     .catch(function (error) {
-                        console.log(error);
                         iziToast.show({
                             title: 'error',
                             message: 'something went wrong!',
@@ -160,7 +152,6 @@
                         obj.myCarts = response.data;
                     })
                     .catch(function (error) {
-                        console.log(error);
                         iziToast.show({
                             title: 'error',
                             message: 'something went wrong!',
@@ -177,8 +168,6 @@
                         params: { id : id , count : count }
                     })
                     .then(function (response) {
-                        //alert(response.data);
-                        //console.log(response.data);
                         if(response.data.message)
                         {
                             iziToast.show({
@@ -191,7 +180,6 @@
                         obj.getCarts();
                     })
                     .catch(function (error) {
-                        console.log(error);
                         iziToast.show({
                             title: 'error',
                             message: 'something went wrong!',

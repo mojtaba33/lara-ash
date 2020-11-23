@@ -53,7 +53,7 @@ class BlogController extends AdminController
             'title'         => $request->input('title'),
             'image'         => $image,
             'body'          => $request->input('body'),
-            'tags'         => $request->input('tags'),
+            'tags'          => $request->input('tags'),
         ]);
 
         return back()->with(['message' => 'عملیات با موفقیت انجام شد.']);

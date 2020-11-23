@@ -30,9 +30,9 @@
                                     @foreach($categories as $category)
                                     <div class="card">
                                         <div class="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">{{ $category->title }}</a>
+                                            <a data-toggle="collapse" data-target="#{{ $category->slug }}">{{ $category->title }}</a>
                                         </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div id="{{ $category->slug }}" class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <ul>
                                                     @foreach($category->children as $child)
@@ -57,8 +57,8 @@
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
-                                        <input name="minPrice" type="text" id="minamount">
-                                        <input name="maxPrice" type="text" id="maxamount">
+                                        <input name="minPrice" type="text" id="minamount" style="max-width: 60px" >
+                                        <input name="maxPrice" type="text" id="maxamount" style="max-width: 60px">
                                     </div>
                                 </div>
                             </div>

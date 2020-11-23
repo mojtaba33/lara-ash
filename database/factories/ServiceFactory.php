@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Service;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class ServiceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Service::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->name,
+            'label' => $this->faker->name,
+            'url'   => 'upload/faker/90.jpg'
+        ];
+    }
+}

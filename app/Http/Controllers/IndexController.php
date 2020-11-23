@@ -17,7 +17,7 @@ class IndexController extends Controller
         $leftBanner = Banner::where('show',1)->where('position' , 'left')->first();
         $rightBanners = Banner::where('show',1)->where('position' , 'right')->take(4)->get();
 
-        $categories = Category::where('parent_id',0)->get();
+        $categories = Category::latest()->where('parent_id',0)->take(4)->get();
 
         $topOfferProducts = Product::where('top_offer',1)->latest()->get();
 

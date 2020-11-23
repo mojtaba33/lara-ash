@@ -3,10 +3,13 @@
 namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id','category_id','title','image','slug','body','tags',
     ];
