@@ -1,17 +1,17 @@
 <?php
 namespace App\Http\Controllers\Payment;
 
+use App\Http\Controllers\coupon\CouponTrait;
 use App\Notifications\Paid;
 use Illuminate\Support\Facades\Notification;
 use SoapClient;
 
 class Zarinpal extends PaymentInterface
 {
-
     public function payment()
     {
-        $checkout = auth()->user()->checkouts()->where('payment' , 0)->firstOrFail();
-        $totalPrice = $this->getTotalPrice($checkout);
+        $checkout = auth()->user()->checkouts()->where('payment' , 0)->where('resnumber',null)->firstOrFail();
+        $totalPrice = $this->getTotalPrice();
 
         if ($checkout->address == null || $checkout->name == null || $checkout->lastName == null || $checkout->phone == null || $checkout->postCode == null){
             return back()->with('message' , 'اطلاعات کافی نیست.');
@@ -50,7 +50,7 @@ class Zarinpal extends PaymentInterface
     public function checker()
     {
         $checkout = auth()->user()->checkouts()->where('payment' , 0)->firstOrFail();
-        $totalPrice = $this->getTotalPrice($checkout);
+        $totalPrice = $this->getTotalPrice();
 
         $MerchantID = 'f83cc956-f59f-11e6-889a-005056a205be';
         $Amount = $totalPrice;
@@ -75,6 +75,12 @@ class Zarinpal extends PaymentInterface
                 ]);
 
                 Notification::send(auth()->user() , new Paid($checkout,$result->RefID));
+
+                $coupon = auth()->user()->unusedCoupons()->latest()->first();
+                if($coupon)
+                {
+                    $coupon->is_used = 1;
+                }
 
                 echo 'Transaction success. RefID:'.$result->RefID;
             } else {

@@ -69,6 +69,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class);
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class)->withPivot('is_used');
+    }
+
+    public function unusedCoupons()
+    {
+        return $this->belongsToMany(Coupon::class)->wherePivot('is_used', 0);
+    }
+
     public function hasRole($role)
     {
         foreach ($this->roles()->get() as $userRoles) {

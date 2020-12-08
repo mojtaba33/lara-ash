@@ -17,17 +17,17 @@ class CartController extends Controller
 
     public function get()
     {
-        if (!auth()->check() || ! auth()->user()->checkouts()->pluck('payment')->contains(0) ){
+        if (!auth()->check() || ! auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first() ){
             return response([
                 'totalPrice' => 0,
                 'totalCount' => 0,
             ]);
         }
 
-        $checkout = auth()->user()->checkouts()->where('payment',0)->first();
+        $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
 
         $carts = response([
-            'data'      => new CartCollection( $checkout->carts()->get() ),
+            'data'       => new CartCollection( $checkout->carts()->get() ),
             'totalPrice' => $this->getTotalPrice( $checkout ),
             'totalCount' => $checkout->count,
         ]);

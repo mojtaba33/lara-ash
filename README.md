@@ -3,8 +3,6 @@
 
 Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
 
-Alternative installation is possible without local dependencies relying on [Docker](#docker). 
-
 Clone the repository
 
     git clone https://github.com/mojtaba33/lara-ash.git laravel
@@ -40,6 +38,4 @@ Start the local development server
 
     php artisan serve
 
-You can now access the server at http://localhost:8000
-
-**TL;DR command list**
+You can now access the server at **http://127.0.0.1:8000** and You can login with **email:mojtaba@gmail.com** and **password:12345678** as administrator

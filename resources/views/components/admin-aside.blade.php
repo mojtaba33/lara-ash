@@ -121,6 +121,18 @@
                 </ul>
             </li>
 
+            <li class="sub-menu">
+                <a href="javascript:;" class="">
+                    <i class="icon-cogs"></i>
+                    <span> کد تخفیف </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="{{ route('admin.coupon.index') }}">لیست کد های تخفیف</a></li>
+                    <li><a class="" href="{{ route('admin.coupon.create') }}">افزودن کد تخفیف</a></li>
+                </ul>
+            </li>
+
             <li>
                 <a class="" href="{{ url('/login') }}">
                     <i class="icon-user"></i>

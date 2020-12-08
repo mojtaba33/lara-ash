@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['a
     Route::get('orders/{checkout}','OrderController@single')->name('order.single');
     Route::patch('orders/{checkout}','OrderController@deliver')->name('order.deliver');
 
+    Route::name('admin')->resource('coupon','CouponController');
+
     Route::post('ckEditor/','AdminController@ckUpload')->name('ckUpload');
 });
 
@@ -77,7 +79,7 @@ Route::post('/comment/add', 'CommentController@store')->name('add.comment')->mid
 Route::get('category/','CategoryController@index')->name('category.all');
 Route::get('category/{category:slug}','CategoryController@single')->name('category.single');
 
-Route::get('checkout','CheckoutController@index')->name('checkout.index');
+Route::get('checkout','CheckoutController@index')->middleware(['verified','cart'])->name('checkout.index');
 
 Route::prefix('cart')->group(function (){
     Route::post('/{product}','CartController@add')->name('add.to.cart');
@@ -111,21 +113,7 @@ Route::get('search','IndexController@search')->name('search.index');
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 
-/*Route::get('/', function(){
-    $category = \App\Category::where('parent_id' , 0)->first();
-    echo $category->getProducts()->Count();
-    dd( $category->getProducts());
-});*/
-
-/*Route::get('/', function () {
-    request()->session()->put('key', [
-        'name' => 'ali',
-        'salam' => 'asd'
-    ]);
-    dd(session('key','aaaaaaa'));
-    return view('welcome');
-});*/
-
+Route::post('check-coupon','CouponController@checkCoupon')->middleware('verified');
 
 Auth::routes();
 

@@ -24,6 +24,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('add-to-cart', require('./components/AddToCartComponent.vue').default);
 Vue.component('cart', require('./components/CartComponent.vue').default);
 Vue.component('shop-cart', require('./components/ShopCartComponent.vue').default);
+Vue.component('coupon', require('./components/CouponComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

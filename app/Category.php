@@ -55,6 +55,11 @@ class Category extends Model
         return $this->hasMany(Filter::class);
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class);
+    }
+
     public function path()
     {
         return url('category/'.$this->slug);

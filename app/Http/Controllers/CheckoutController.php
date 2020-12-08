@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Checkout;
+use App\Http\Controllers\coupon\CouponTrait;
 use App\Product;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
+    use CouponTrait;
     public function address(Checkout $checkout , Request $request)
     {
         $request->validate([
@@ -31,22 +33,9 @@ class CheckoutController extends Controller
 
     public function index()
     {
-        $checkout = auth()->user()->checkouts()->where('payment',0)->first();
+        $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
         $carts = $checkout->carts()->get();
-        $totalPrice = $this->getTotalPrice($checkout);
+        $totalPrice = $this->getTotalPrice();
         return view('default.checkout.checkout',compact('checkout','carts','totalPrice'));
-    }
-
-    public function getTotalPrice(Checkout $checkout)
-    {
-        $carts      = $checkout->carts()->get() ;
-        $totalPrice = 0 ;
-
-        foreach ($carts as $cart)
-        {
-            $totalPrice += Product::find($cart->product_id)->getPrice() * $cart->count;
-        }
-
-        return $totalPrice;
     }
 }

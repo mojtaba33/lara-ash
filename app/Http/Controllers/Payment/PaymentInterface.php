@@ -5,23 +5,12 @@ namespace App\Http\Controllers\Payment;
 
 
 use App\Checkout;
+use App\Http\Controllers\coupon\CouponTrait;
 use App\Product;
 
 abstract class PaymentInterface
 {
+    use CouponTrait;
     abstract public function payment();
     abstract public function checker();
-
-    protected function getTotalPrice(Checkout $checkout)
-    {
-        $carts      = $checkout->carts()->get() ;
-        $totalPrice = 0 ;
-
-        foreach ($carts as $cart)
-        {
-            $totalPrice += Product::find($cart->product_id)->getPrice() * $cart->count;
-        }
-
-        return $totalPrice;
-    }
 }
