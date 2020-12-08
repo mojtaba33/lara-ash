@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     public function blog()
     {
-        $blogs = Blog::latest()->paginate(12);
+        $blogs = Blog::latest()->paginate(9);
         return view('default.blog.blog',compact('blogs'));
     }
 
@@ -48,7 +48,7 @@ class BlogController extends Controller
 
     public function category(Category $category)
     {
-        $blogs = $category->blogs()->latest()->paginate(12);
+        $blogs = $category->blogs()->latest()->paginate(9);
 
         return view('default.blog.category',compact('blogs'));
     }
