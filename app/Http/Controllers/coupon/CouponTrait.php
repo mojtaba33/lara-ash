@@ -2,13 +2,13 @@
 namespace App\Http\Controllers\coupon;
 
 
+use App\Checkout;
 use App\Product;
 
 trait CouponTrait
 {
-    public function getTotalPrice()
+    public function getTotalPrice(Checkout $checkout)
     {
-        $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
         $carts      = $checkout->carts()->get() ;
         $totalPrice = 0 ;
         $coupon = auth()->user()->unusedCoupons()->latest()->first();
@@ -30,9 +30,8 @@ trait CouponTrait
         return $totalPrice;
     }
 
-    public function getTotalPriceWithoutCoupon()
+    public function getTotalPriceWithoutCoupon(Checkout $checkout)
     {
-        $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
         $carts      = $checkout->carts()->get() ;
         $totalPrice = 0 ;
 

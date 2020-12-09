@@ -35,7 +35,8 @@ class CheckoutController extends Controller
     {
         $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
         $carts = $checkout->carts()->get();
-        $totalPrice = $this->getTotalPrice();
-        return view('default.checkout.checkout',compact('checkout','carts','totalPrice'));
+        $totalPrice = $this->getTotalPrice($checkout);
+        $getTotalPriceWithoutCoupon = $this->getTotalPriceWithoutCoupon($checkout);
+        return view('default.checkout.checkout',compact('checkout','carts','totalPrice','getTotalPriceWithoutCoupon'));
     }
 }

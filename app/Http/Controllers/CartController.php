@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Checkout;
+use App\Http\Controllers\coupon\CouponTrait;
 use App\Http\Resources\CartCollection;
 use App\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    use CouponTrait;
     public function index()
     {
         return view('default.cart.cart');
@@ -28,7 +30,7 @@ class CartController extends Controller
 
         $carts = response([
             'data'       => new CartCollection( $checkout->carts()->get() ),
-            'totalPrice' => $this->getTotalPrice( $checkout ),
+            'totalPrice' => $this->getTotalPriceWithoutCoupon( $checkout ),
             'totalCount' => $checkout->count,
         ]);
 
@@ -116,18 +118,4 @@ class CartController extends Controller
         $cart->increment('count',$count);
         $cart->checkout->increment('count',$count);
     }
-
-    public function getTotalPrice(Checkout $checkout)
-    {
-        $carts      = $checkout->carts()->get() ;
-        $totalPrice = 0 ;
-
-        foreach ($carts as $cart)
-        {
-            $totalPrice += Product::find($cart->product_id)->getPrice() * $cart->count;
-        }
-
-        return $totalPrice;
-    }
-
 }

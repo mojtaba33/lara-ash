@@ -139,8 +139,10 @@
                             </div>
                             <div class="checkout__order__total">
                                 <ul>
-                                    <li>Subtotal <span>$ {{ $totalPrice }}</span></li>
-                                    <li>Total <span>$ {{ $totalPrice }}</span></li>
+                                    @if(auth()->user()->unusedCoupons()->latest()->first())
+                                        <li>Subtotal (no coupon)<del style="color: #ca1515;float: right;">$ {{ $getTotalPriceWithoutCoupon }}</del></li>
+                                    @endif
+                                    <li>Total (with coupon)<span>$ {{ $totalPrice }}</span></li>
                                 </ul>
                             </div>
 

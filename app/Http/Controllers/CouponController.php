@@ -27,10 +27,12 @@ class CouponController extends Controller
             return \response()->json(['message' => 'you have used this code before!'],404);
         }
 
+        $checkout = auth()->user()->checkouts()->where('payment',0)->where('resnumber',null)->first();
+
         return \response()->json([
             'message'  => 'coupon applied',
-            'oldPrice' => $this->getTotalPriceWithoutCoupon(),
-            'newPrice' => $this->getTotalPrice(),
+            'oldPrice' => $this->getTotalPriceWithoutCoupon($checkout),
+            'newPrice' => $this->getTotalPrice($checkout),
         ]);
     }
 }
