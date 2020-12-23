@@ -62,18 +62,25 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                        @foreach($categories as $category)
+
                         <li>
-                            <a href="{{ $category->path() }}">{{ $category->title }}</a>
-                            @if($category->children()->get()->isNotEmpty())
+                            <a href="">categories</a>
                             <ul class="dropdown">
-                                @foreach($category->children()->get() as $cat)
-                                <li><a href="{{ $cat->path() }}">{{ $cat->title }}</a></li>
+                                @foreach($categories as $category)
+                                <li>
+                                    <a href="{{ $category->path() }}">{{ $category->title }}</a>
+                                    @if($category->children()->get()->isNotEmpty())
+                                    <ul class="zr-dropdown">
+                                        @foreach($category->children()->get() as $cat)
+                                        <li><a href="{{ $cat->path() }}">{{ $cat->title }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </li>
                                 @endforeach
                             </ul>
-                            @endif
                         </li>
-                        @endforeach
+
                         <li><a href="{{ route('blog.all') }}">Blog</a></li>
                     </ul>
                 </nav>
