@@ -79,6 +79,7 @@
                                 :url="{{ json_encode(route('add.to.cart',$product)) }}"
                                 :colors = "{{ json_encode(explode(',',$product->color)) }}"
                                 :sizes = "{{ json_encode(explode(',',$product->size)) }}"
+                                :product = "{{ json_encode($product) }}"
                         ></add-to-cart>
                         {{--<div class="product__details__widget">
                             <ul>

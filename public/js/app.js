@@ -1965,15 +1965,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddToCartComponent",
-  props: ['product_id', 'url', 'colors', 'sizes'],
+  props: ['product_id', 'url', 'colors', 'sizes', 'product'],
   data: function data() {
     return {
       count: 1,
-      colorChecked: null,
-      sizeChecked: null
+      colorChecked: this.colors[0],
+      sizeChecked: this.sizes[0],
+      status: this.product.status
     };
   },
   watch: {
@@ -2490,7 +2490,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.increase[data-v-2c2cc14c]{\r\n    position: absolute;\r\n    right: 15px;\r\n    top: 13px;\r\n    cursor:pointer;\n}\n.decrease[data-v-2c2cc14c]{\r\n    position: absolute;\r\n    left: 15px;\r\n    top: 13px;\r\n    cursor:pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.increase[data-v-2c2cc14c]{\n    position: absolute;\n    right: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n.decrease[data-v-2c2cc14c]{\n    position: absolute;\n    left: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n", ""]);
 
 // exports
 
@@ -34472,15 +34472,29 @@ var render = function() {
             },
             [_c("span", { staticClass: "icon_heart_alt" })]
           )
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
+        ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "product__details__widget" }, [
       _c("ul", [
-        _vm._m(1),
+        _c("li", [
+          _c("span", [_vm._v("Availability:")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "stock__checkbox" }, [
+            _c("label", { attrs: { for: "stockin" } }, [
+              _vm._v(
+                "\n                        In Stock\n                        "
+              ),
+              _c("input", {
+                attrs: { type: "checkbox", id: "stockin", disabled: "" },
+                domProps: { checked: _vm.status }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "checkmark" })
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("li", [
           _c("span", [_vm._v("Available color:")]),
@@ -34500,6 +34514,7 @@ var render = function() {
                       expression: "color != '' "
                     }
                   ],
+                  key: "color-" + index,
                   attrs: { for: color }
                 },
                 [
@@ -34545,6 +34560,7 @@ var render = function() {
               return _c(
                 "label",
                 {
+                  key: "size-" + i,
                   class: { active: size == _vm.sizeChecked },
                   attrs: { for: size }
                 },
@@ -34586,41 +34602,12 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(0)
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("span", { staticClass: "icon_adjust-horiz" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("span", [_vm._v("Availability:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "stock__checkbox" }, [
-        _c("label", { attrs: { for: "stockin" } }, [
-          _vm._v(
-            "\n                        In Stock\n                        "
-          ),
-          _c("input", { attrs: { type: "checkbox", id: "stockin" } }),
-          _vm._v(" "),
-          _c("span", { staticClass: "checkmark" })
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -53968,8 +53955,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\MOJ\MOJ\laravel project\ashion\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\MOJ\MOJ\laravel project\ashion\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\MOJ\MOJ\laravelproject\ashion\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\MOJ\MOJ\laravelproject\ashion\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

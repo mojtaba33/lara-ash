@@ -12,7 +12,6 @@
             <a  href="" class="cart-btn" @click.prevent="addToCart()"><span class="icon_bag_alt"></span> Add to cart</a>
             <ul>
                 <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt"></span></a></li>
-                <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
             </ul>
         </div>
         <div class="product__details__widget">
@@ -22,7 +21,7 @@
                     <div class="stock__checkbox">
                         <label for="stockin">
                             In Stock
-                            <input type="checkbox" id="stockin">
+                            <input type="checkbox" id="stockin" :checked="status" disabled>
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -31,7 +30,7 @@
                     <span>Available color:</span>
 
                     <div class="color__checkbox">
-                        <label v-for="(color,index) in colors" :for="color" v-show="color != '' ">
+                        <label v-for="(color,index) in colors" :for="color" :key="`color-${index}`" v-show="color != '' ">
                             <input type="radio" name="color" :value="color" :id="color" v-model="colorChecked">
                             <span class="checkmark" :style="{ backgroundColor: color }"></span>
                         </label>
@@ -41,7 +40,7 @@
                 <li>
                     <span>Available size:</span>
                     <div class="size__btn">
-                        <label v-for="(size,i) in sizes" :for="size" :class="{'active': size == sizeChecked}">
+                        <label v-for="(size,i) in sizes" :for="size" :key="`size-${i}`" :class="{'active': size == sizeChecked}">
                             <input type="radio" name="size" :value="size" :id="size" v-model="sizeChecked">
                             {{ size.substring(size.indexOf("'") + 1,size.lastIndexOf("'")) }}
                         </label>
@@ -59,12 +58,13 @@
 <script>
     export default {
         name: "AddToCartComponent",
-        props : ['product_id','url','colors','sizes'],
+        props : ['product_id','url','colors','sizes','product'],
         data(){
             return {
                 count        : 1,
-                colorChecked : null,
-                sizeChecked  : null,
+                colorChecked : this.colors[0],
+                sizeChecked  : this.sizes[0],
+                status: this.product.status,
             }
         },
         watch:{
