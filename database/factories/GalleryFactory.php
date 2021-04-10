@@ -14,6 +14,16 @@ class GalleryFactory extends Factory
      * @var string
      */
     protected $model = Gallery::class;
+    protected $image = [
+        'upload/faker/details/thumb-1.jpg',
+        'upload/faker/details/thumb-2.jpg',
+        'upload/faker/details/thumb-3.jpg',
+        'upload/faker/details/thumb-4.jpg',
+        'upload/faker/details/product-1.jpg',
+        'upload/faker/details/product-2.jpg',
+        'upload/faker/details/product-3.jpg',
+        'upload/faker/details/product-4.jpg',
+    ];
 
     /**
      * Define the model's default state.
@@ -22,11 +32,12 @@ class GalleryFactory extends Factory
      */
     public function definition()
     {
+        $image = collect($this->image)->random();
         return [
             'product_id' => Product::factory(),
             'image' => [
-                '125'        => 'upload/faker/90.jpg',
-                '420'       => 'upload/faker/420.jpg',
+                '125'        => $image,
+                '420'        => $image,
             ],
         ];
     }

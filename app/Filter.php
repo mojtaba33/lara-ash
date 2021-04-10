@@ -3,10 +3,12 @@
 namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Filter extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'category_id','parent_id','title','slug',
     ];

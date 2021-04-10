@@ -1,7 +1,7 @@
 <ul class="comments">
     @foreach($comments as $comment)
     <li class="clearfix">
-        <img src="{{ url($comment->user->image) }}" style="border-radius: 50%;" class="avatar" alt="">
+        <img src="{{ url($comment->user->image) }}" style="border-radius: 50%;width:70px !important;margin-bottom: 10px;" class="avatar" alt="">
         <div class="post-comments">
             <p class="meta">{{ $comment->created_at }} <a href="#"> <strong> {{ $comment->user->name }} </strong> </a> says :
                 <i class="pull-right">

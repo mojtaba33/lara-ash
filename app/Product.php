@@ -79,7 +79,7 @@ class Product extends Model
     public function getProductRate()
     {
         $rates = $this->comments()->where('approved',1)->where('rate','!=',0)->get()->sum('rate');
-        $count = $this->comments()->where('approved',1)->where('rate',0)->get()->count();
+        $count = $this->comments()->where('approved',1)->where('rate','!=',0)->get()->count();
 
         if ($count == 0)
             return 0;
@@ -89,7 +89,7 @@ class Product extends Model
 
     public function getProductReviewCount()
     {
-        $count = $this->comments()->where('approved',1)->where('rate',0)->get()->count();
+        $count = $this->comments()->where('approved',1)->where('rate','!=',0)->get()->count();
         return $count;
     }
 

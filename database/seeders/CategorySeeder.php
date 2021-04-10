@@ -25,7 +25,7 @@ class CategorySeeder extends Seeder
                 ->has(Product::factory()
                     ->has(Gallery::factory()->count(3),'galleries')
                     ->count(10), 'products')
-                ->count(5), 'children')
+                ->count(4), 'children')
             ->count(3)
             ->create();
     }

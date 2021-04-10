@@ -16,6 +16,16 @@ class ProductFactory extends Factory
      * @var string
      */
     protected $model = Product::class;
+    protected $image = [
+        'upload/faker/product-1.jpg',
+        'upload/faker/product-2.jpg',
+        'upload/faker/product-3.jpg',
+        'upload/faker/product-4.jpg',
+        'upload/faker/product-5.jpg',
+        'upload/faker/product-6.jpg',
+        'upload/faker/product-7.jpg',
+        'upload/faker/product-8.jpg',
+    ];
 
     /**
      * Define the model's default state.
@@ -24,6 +34,7 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $image = collect($this->image)->random();
         return [
             'category_id' => Category::factory(),
             'user_id' => User::factory(),
@@ -32,10 +43,10 @@ class ProductFactory extends Factory
                 '90'        => $this->faker->image('upload/faker',90, 90, 'fashion'),
                 '360'       => $this->faker->image('upload/faker',260, 360, 'fashion'),
                 '420'       => $this->faker->image('upload/faker',420, 550, 'fashion'),*/
-                'original'  => 'upload/faker/original.jpg',
-                '90'        => 'upload/faker/90.jpg',
-                '360'       => 'upload/faker/360.jpg',
-                '420'       => 'upload/faker/420.jpg',
+                'original'  => $image,
+                '90'        => $image,
+                '360'       => $image,
+                '420'       => $image,
             ],
             'title'     => $this->faker->name,
             'brand'     => $this->faker->company(),

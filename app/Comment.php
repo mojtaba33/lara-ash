@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'rate' , 'body' ,'commentable_id',
         'commentable_type' , 'user_id' , 'parent_id' , 'approved'

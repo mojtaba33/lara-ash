@@ -203,7 +203,7 @@
                         @foreach($hotTrendProducts as $hotTrendProduct)
                         <div class="trend__item">
                             <div class="trend__item__pic">
-                                <img src="{{ url($hotTrendProduct->image[90]) }}" alt="">
+                                <img src="{{ url($hotTrendProduct->image[90]) }}" width="90" height="90" alt="">
                             </div>
                             <div class="trend__item__text">
                                 <h6><a href="{{ $hotTrendProduct->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $hotTrendProduct->title }}</a></h6>
@@ -239,7 +239,7 @@
                         @foreach($bestSellerProducts as $bestSellerProducts)
                         <div class="trend__item">
                             <div class="trend__item__pic">
-                                <img src="{{ url($bestSellerProducts->image[90]) }}" alt="">
+                                <img src="{{ url($bestSellerProducts->image[90]) }}" width="90" height="90" alt="">
                             </div>
                             <div class="trend__item__text">
                                 <h6><a href="{{ $bestSellerProducts->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $bestSellerProducts->title }}</a></h6>
@@ -275,7 +275,7 @@
                         @foreach($features as $feature)
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="{{ url($feature->image[90]) }}" alt="">
+                                    <img src="{{ url($feature->image[90]) }}" width="90" height="90" alt="">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="{{ $feature->path() }}" style="font-size: 14px;color: #111111;margin-bottom: 5px;">{{ $feature->title }}</a></h6>

@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         view()->composer('default.layouts.header', function ($view) {
-            $categories = Category::latest()->where('parent_id',0)->take(2)->get();
+            $categories = Category::latest()->where('parent_id',0)->get();
             return $view->with(compact('categories'));
         });
     }
