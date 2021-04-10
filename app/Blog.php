@@ -21,7 +21,7 @@ class Blog extends Model
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): Array
     {
         return [
             'slug' => [
