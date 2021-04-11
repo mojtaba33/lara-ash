@@ -93,6 +93,9 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                            @if($payment->count() == 0)
+                            <div class="text-center">empty</div>
+                            @else
                             <table class="table table-striped table-advance table-hover">
                                 <thead>
                                 <tr>
@@ -166,9 +169,13 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            @endif
                         </div>
 
                         <div class="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                            @if(auth()->user()->favorites->count() == 0)
+                                <div class="text-center">empty</div>
+                            @else
                             <table class="table table-striped table-advance">
                                     <thead>
                                     <tr>
@@ -178,10 +185,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     @foreach(auth()->user()->favorites as $product)
                                         <tr>
                                             <td class="align-middle"><a style="color: #000;" href="{{ $product->path() }}">{{ $product->title }}</a></td>
-                                            <td class="align-middle"><img src="{{ url($product->image[90]) }}" alt=""></td>
+                                            <td class="align-middle"><img src="{{ url($product->image[90]) }}" height="100" alt=""></td>
                                             <td class="align-middle">{{ $product->getPrice() }}</td>
                                             <td class="align-middle">
                                                 <form action="{{ route('delete.fav',$product) }}" method="post">
@@ -194,8 +202,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
                                     </tbody>
                                 </table>
+                            @endif
                         </div>
 
                     </div>

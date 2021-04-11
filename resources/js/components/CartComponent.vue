@@ -4,10 +4,10 @@
             <span class="icon_bag_alt"></span>
             <div class="tip"> {{ totalCount }}</div>
         </a>
-        <ul class="cart_items" v-if="cartData != null">
-            <li class="cart_item" v-for="(cart , index) in cartData">
+        <ul class="cart_items" v-if="cartData != null || totalCount != 0" :class="{'dn':totalCount == 0}">
+            <li class="cart_item" v-for="(cart , index) in cartData" :key="`cart-${index}`">
                 <div>
-                    <img :src="cart.image" alt="">
+                    <img :src="cart.image" alt="" height="64">
                 </div>
                 <div>
                     <a :href="cart.url">{{ cart.title }}</a>
@@ -123,5 +123,8 @@
         font-size: 12px;
         color: #777;
         font-weight: 100;
+    }
+    .dn{
+        visibility: hidden !important;
     }
 </style>

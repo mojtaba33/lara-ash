@@ -18,7 +18,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(cart,index) in cartData">
+                            <tr v-for="(cart,index) in cartData" :key="`shop-cart-${index}`">
                                 <td class="cart__product__item">
                                     <img src="img/shop-cart/cp-1.jpg" alt="">
                                     <div class="cart__product__item__title">
@@ -55,8 +55,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update cart</a>
+                    <div class="cart__btn update__btn" style="visibility:hidden;">
+                        <a href="#"><span class="icon_loading" ></span> Update cart</a>
                     </div>
                 </div>
             </div>

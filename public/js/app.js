@@ -2029,7 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/fav/add', {
         product_id: this.product_id
       }).then(function (response) {
-        console.log(response);
         iziToast.show({
           title: response.data.title,
           message: response.data.message,
@@ -2037,7 +2036,6 @@ __webpack_require__.r(__webpack_exports__);
           color: response.data.color
         });
       })["catch"](function (error) {
-        console.log(error);
         iziToast.show({
           title: 'error',
           message: 'something went wrong!',
@@ -2509,7 +2507,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.cart_item[data-v-e7ab8a3c]{\n    align-items: center;\n    justify-content: space-between;\n}\n.cart_item a[data-v-e7ab8a3c],.cart_item span[data-v-e7ab8a3c]{\n    font-size: 12px;\n    color: #777;\n    font-weight: 100;\n}\n", ""]);
+exports.push([module.i, "\n.cart_item[data-v-e7ab8a3c]{\n    align-items: center;\n    justify-content: space-between;\n}\n.cart_item a[data-v-e7ab8a3c],.cart_item span[data-v-e7ab8a3c]{\n    font-size: 12px;\n    color: #777;\n    font-weight: 100;\n}\n.dn[data-v-e7ab8a3c]{\n    visibility: hidden !important;\n}\n", ""]);
 
 // exports
 
@@ -34647,40 +34645,48 @@ var render = function() {
       _c("div", { staticClass: "tip" }, [_vm._v(" " + _vm._s(_vm.totalCount))])
     ]),
     _vm._v(" "),
-    _vm.cartData != null
+    _vm.cartData != null || _vm.totalCount != 0
       ? _c(
           "ul",
-          { staticClass: "cart_items" },
+          { staticClass: "cart_items", class: { dn: _vm.totalCount == 0 } },
           [
             _vm._l(_vm.cartData, function(cart, index) {
-              return _c("li", { staticClass: "cart_item" }, [
-                _c("div", [_c("img", { attrs: { src: cart.image, alt: "" } })]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("a", { attrs: { href: cart.url } }, [
-                    _vm._v(_vm._s(cart.title))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", [_c("span", [_vm._v("x " + _vm._s(cart.count))])]),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { color: "red" },
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.deleteCart(cart.cart_id)
+              return _c(
+                "li",
+                { key: "cart-" + index, staticClass: "cart_item" },
+                [
+                  _c("div", [
+                    _c("img", {
+                      attrs: { src: cart.image, alt: "", height: "64" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("a", { attrs: { href: cart.url } }, [
+                      _vm._v(_vm._s(cart.title))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [_c("span", [_vm._v("x " + _vm._s(cart.count))])]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "red" },
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteCart(cart.cart_id)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("x")]
-                  )
-                ])
-              ])
+                      },
+                      [_vm._v("x")]
+                    )
+                  ])
+                ]
+              )
             }),
             _vm._v(" "),
             _vm._m(0)
@@ -34925,7 +34931,7 @@ var render = function() {
                   _c(
                     "tbody",
                     _vm._l(_vm.cartData, function(cart, index) {
-                      return _c("tr", [
+                      return _c("tr", { key: "shop-cart-" + index }, [
                         _c("td", { staticClass: "cart__product__item" }, [
                           _c("img", {
                             attrs: { src: "img/shop-cart/cp-1.jpg", alt: "" }
@@ -35112,12 +35118,19 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-6" }, [
-        _c("div", { staticClass: "cart__btn update__btn" }, [
-          _c("a", { attrs: { href: "#" } }, [
-            _c("span", { staticClass: "icon_loading" }),
-            _vm._v(" Update cart")
-          ])
-        ])
+        _c(
+          "div",
+          {
+            staticClass: "cart__btn update__btn",
+            staticStyle: { visibility: "hidden" }
+          },
+          [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("span", { staticClass: "icon_loading" }),
+              _vm._v(" Update cart")
+            ])
+          ]
+        )
       ])
     ])
   }

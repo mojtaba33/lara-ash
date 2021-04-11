@@ -1898,7 +1898,7 @@ ol {
 	background: #292929;
 }
 
-.header__menu ul li .zr-dropdown 
+.header__menu ul li .zr-dropdown
 {
 	position: absolute;
 	left: 150px;
@@ -5127,7 +5127,50 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
-}/*
+}
+
+.header__right__widget .li_cart {
+	position: relative;
+}
+.header__right__widget .li_cart .cart_items{
+	position: absolute;
+	top: 20px;
+	right: 0;
+	background: #f5f5f5 none repeat scroll 0 0;
+	border: 1px solid #eeeeee;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14);
+	padding: 10px 15px;
+	text-align: left;
+	transform: rotateX(90deg);
+	transform-origin: center top 0;
+	transition: all 0.6s ease 0s;
+	width: 273px;
+	visibility: hidden;
+	z-index: -99;
+}
+
+.header__right__widget .li_cart:hover .cart_items{
+	transform: rotateX(0deg);
+	visibility: visible;
+	z-index: 99999;
+}
+
+.cart_items .cart-products {
+	float: none;
+	margin: 0 -15px;
+	overflow: hidden;
+	padding: 10px 15px;
+	width: auto;
+	display: flex;
+}
+.cart_items .cart_item{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-right: 0;
+	margin-bottom: 10px;
+}
+/*
 * iziToast | v1.4.0
 * http://izitoast.marcelodolce.com
 * by Marcelo Dolce.

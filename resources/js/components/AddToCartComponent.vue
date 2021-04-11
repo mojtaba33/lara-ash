@@ -11,7 +11,7 @@
             </div>
             <a  href="" class="cart-btn" @click.prevent="addToCart()"><span class="icon_bag_alt"></span> Add to cart</a>
             <ul>
-                <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt"></span></a></li>
+                <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt" ></span></a></li>
             </ul>
         </div>
         <div class="product__details__widget">
@@ -129,7 +129,6 @@
                         product_id : this.product_id
                     })
                     .then(function (response) {
-                        console.log(response);
                         iziToast.show({
                             title: response.data.title,
                             message: response.data.message,
@@ -138,7 +137,6 @@
                         });
                     })
                     .catch(function (error) {
-                        console.log(error);
                         iziToast.show({
                             title: 'error',
                             message: 'something went wrong!',
