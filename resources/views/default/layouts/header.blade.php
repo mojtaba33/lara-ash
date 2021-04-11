@@ -32,19 +32,28 @@
     <ul class="offcanvas__widget">
         <li><span class="icon_search search-switch"></span></li>
         <li><a href="{{ route('user.profile') }}"><span class="icon_heart_alt"></span>
-                <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
-            </a></li>
-        <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+            <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
+        </a></li>
+        <li><a href="/cart"><span class="icon_bag_alt"></span></a></li>
     </ul>
     <div class="offcanvas__logo">
-        <a href="./index.html"><img src="/default/img/logo.png" alt=""></a>
+        <a href="/"><img src="/default/img/logo.png" alt=""></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
+        @guest
+            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('register') }}">Register</a>
+        @else
+            <form id="logout-form" style="display: inline" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <input type="submit" value="logout" style="border: none;outline: none;font-size: 12px;background-color: transparent;color: #666666;position: relative;margin-right: 8px;">
+            </form>
+            <a href="{{ route('user.profile') }}" class="btn btn-sm btn-light">profile</a>
+        @if(auth()->user()->level === 'admin')
+                <a href="{{ route('admin.panel') }}" style="font-size: 12px;" class="btn btn-sm btn-outline-primary">Admin</a>
+            @endif
+        @endguest
     </div>
 </div>
 <!-- Offcanvas Menu End -->
@@ -61,7 +70,7 @@
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
 
                         <li>
                             <a href="">categories</a>
@@ -86,30 +95,33 @@
                 </nav>
             </div>
             <div class="col-lg-3">
-                <div class="header__right" style="display: flex;justify-content: center;align-items: center;">
-                    <div class="header__right__auth" style="display: flex;justify-content: center;align-items: center;">
-                        @guest
-                            <a href="{{ route('login') }}">Login</a>
-                            <a href="{{ route('register') }}">Register</a>
-                        @else
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <input type="submit" value="logout" style="border: none;outline: none;font-size: 12px;background-color: transparent;color: #666666;position: relative;margin-right: 8px;">
-                            </form>
-                            <a href="{{ route('user.profile') }}" class="btn btn-sm btn-light">profile</a>
-                        @if(auth()->user()->level === 'admin')
-                                <a href="{{ route('admin.panel') }}" style="font-size: 12px;" class="btn btn-sm btn-outline-primary">Admin</a>
-                            @endif
-                        @endguest
+                <div class="header__right">
+                    <div style="display: flex;justify-content: center;align-items: center;">
+                        <div class="header__right__auth" style="display: flex;justify-content: center;align-items: center;">
+                            @guest
+                                <a href="{{ route('login') }}">Login</a>
+                                <a href="{{ route('register') }}">Register</a>
+                            @else
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" value="logout" style="border: none;outline: none;font-size: 12px;background-color: transparent;color: #666666;position: relative;margin-right: 8px;">
+                                </form>
+                                <a href="{{ route('user.profile') }}" class="btn btn-sm btn-light">profile</a>
+                            @if(auth()->user()->level === 'admin')
+                                    <a href="{{ route('admin.panel') }}" style="font-size: 12px;" class="btn btn-sm btn-outline-primary">Admin</a>
+                                @endif
+                            @endguest
 
+                        </div>
+                        <ul class="header__right__widget" style="display: flex;justify-content: center;align-items: center;">
+                            <li><span class="icon_search search-switch"></span></li>
+                            <li><a href="{{ route('user.profile') }}"><span class="icon_heart_alt"></span>
+                                    <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
+                                </a></li>
+                            <cart :carts="carts"></cart>
+                        </ul>
                     </div>
-                    <ul class="header__right__widget" style="display: flex;justify-content: center;align-items: center;">
-                        <li><span class="icon_search search-switch"></span></li>
-                        <li><a href="{{ route('user.profile') }}"><span class="icon_heart_alt"></span>
-                                <div class="tip">{{ auth()->check() ? auth()->user()->favorites->count() : '0' }}</div>
-                            </a></li>
-                        <cart :carts="carts"></cart>
-                    </ul>
+
                 </div>
             </div>
         </div>
