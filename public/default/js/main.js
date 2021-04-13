@@ -98,6 +98,17 @@ Created: Colorib
         margin: 10,
         items: 4,
         dots: true,
+        responsive:{
+            0:{
+                items:1,
+            },
+            600:{
+                items:3,
+            },
+            1000:{
+                items:4,
+            },
+        },
         //smartSpeed: 1200,
         autoHeight: false,
         //autoplay: true
@@ -220,7 +231,7 @@ Created: Colorib
 			$('.product__big__img').attr({src: imgurl});
 		}
     });
-    
+
     /*-------------------
 		Quantity change
 	--------------------- */
@@ -242,7 +253,7 @@ Created: Colorib
 		}
 		$button.parent().find('input').val(newVal);
     });*/
-    
+
     /*-------------------
 		Radio Btn
 	--------------------- */

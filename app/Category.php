@@ -77,7 +77,7 @@ class Category extends Model
 
         foreach ($this->children()->get() as $key=>$category)
         {
-            foreach ($category->products()->get() as $product)
+            foreach ($category->products()->filter()->search()->get() as $product)
                 if ($category->products()->get()->isNotEmpty())
                     $products->push($product);
         }
