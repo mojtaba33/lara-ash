@@ -2037,7 +2037,10 @@ __webpack_require__.r(__webpack_exports__);
           rtl: false,
           color: response.data.color
         });
-        self.is_fav = true;
+
+        if (response.data.title == 'success') {
+          self.is_fav = true;
+        }
       })["catch"](function (error) {
         iziToast.show({
           title: 'error',
