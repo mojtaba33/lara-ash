@@ -1967,13 +1967,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddToCartComponent",
-  props: ['product_id', 'url', 'colors', 'sizes', 'product'],
+  props: ['product_id', 'url', 'colors', 'sizes', 'product', 'fav'],
   data: function data() {
     return {
       count: 1,
       colorChecked: this.colors[0],
       sizeChecked: this.sizes[0],
-      status: this.product.status
+      status: this.product.status,
+      is_fav: this.fav
     };
   },
   watch: {
@@ -2026,6 +2027,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addToFav: function addToFav() {
+      var self = this;
       axios.post('/fav/add', {
         product_id: this.product_id
       }).then(function (response) {
@@ -2035,6 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
           rtl: false,
           color: response.data.color
         });
+        self.is_fav = true;
       })["catch"](function (error) {
         iziToast.show({
           title: 'error',
@@ -2488,7 +2491,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.increase[data-v-2c2cc14c]{\n    position: absolute;\n    right: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n.decrease[data-v-2c2cc14c]{\n    position: absolute;\n    left: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n", ""]);
+exports.push([module.i, "\n.increase[data-v-2c2cc14c]{\n    position: absolute;\n    right: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n.decrease[data-v-2c2cc14c]{\n    position: absolute;\n    left: 15px;\n    top: 13px;\n    cursor:pointer;\n}\n.fav[data-v-2c2cc14c]{\n    color:red;\n}\n", ""]);
 
 // exports
 
@@ -34468,7 +34471,12 @@ var render = function() {
                 }
               }
             },
-            [_c("span", { staticClass: "icon_heart_alt" })]
+            [
+              _c("span", {
+                staticClass: "icon_heart_alt",
+                class: { fav: _vm.is_fav }
+              })
+            ]
           )
         ])
       ])

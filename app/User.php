@@ -102,4 +102,13 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
+
+    public function is_fav($product)
+    {
+        if(auth()->check())
+        {
+            return auth()->user()->favorites->contains('id',$product->id);
+        }
+        return false;
+    }
 }

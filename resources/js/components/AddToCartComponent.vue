@@ -11,7 +11,7 @@
             </div>
             <a  href="" class="cart-btn" @click.prevent="addToCart()"><span class="icon_bag_alt"></span> Add to cart</a>
             <ul>
-                <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt" ></span></a></li>
+                <li><a href="" @click.prevent="addToFav()"><span class="icon_heart_alt" :class="{'fav':is_fav}"></span></a></li>
             </ul>
         </div>
         <div class="product__details__widget">
@@ -58,13 +58,14 @@
 <script>
     export default {
         name: "AddToCartComponent",
-        props : ['product_id','url','colors','sizes','product'],
+        props : ['product_id','url','colors','sizes','product','fav'],
         data(){
             return {
                 count        : 1,
                 colorChecked : this.colors[0],
                 sizeChecked  : this.sizes[0],
                 status: this.product.status,
+                is_fav: this.fav,
             }
         },
         watch:{
@@ -124,6 +125,7 @@
                     });
             },
             addToFav(){
+                const self = this;
                 axios
                     .post('/fav/add',{
                         product_id : this.product_id
@@ -135,6 +137,7 @@
                             rtl: false,
                             color: response.data.color,
                         });
+                        self.is_fav = true;
                     })
                     .catch(function (error) {
                         iziToast.show({
@@ -162,5 +165,8 @@
     left: 15px;
     top: 13px;
     cursor:pointer;
+}
+.fav{
+    color:red;
 }
 </style>

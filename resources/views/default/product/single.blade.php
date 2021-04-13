@@ -80,6 +80,7 @@
                                 :colors = "{{ json_encode(explode(',',$product->color)) }}"
                                 :sizes = "{{ json_encode(explode(',',$product->size)) }}"
                                 :product = "{{ json_encode($product) }}"
+                                :fav="{{ json_encode(auth()->check() ? auth()->user()->is_fav($product) : false) }}"
                         ></add-to-cart>
                         {{--<div class="product__details__widget">
                             <ul>
