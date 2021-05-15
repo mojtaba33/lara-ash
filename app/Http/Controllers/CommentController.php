@@ -28,6 +28,6 @@ class CommentController extends Controller
             'rate' => $request->input('rate') != null ? $request->input('rate') : 0 ,
         ]);
 
-        return back()->with('message','Your review has been successfully registered.We will display it after it approved by admin');
+        return back()->with('message','Your review has been successfully registered.After confirmation by the administrator, we will display it');
     }
 }

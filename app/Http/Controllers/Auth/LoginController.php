@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -82,6 +83,7 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
+        App::setlocale('en');
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
