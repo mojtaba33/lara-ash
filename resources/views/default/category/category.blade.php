@@ -150,6 +150,9 @@
                                         </div>
                                     @endif
                                     <div class="product__price">
+                                        <del style="color: #b1b0b0;font-size: 16px;">$ {{ $product->price }}</del>
+                                    </div>
+                                    <div class="product__price">
                                         $ {{ $product->discount == 0 ? $product->price : $product->price - ( $product->price * $product->discount ) / 100  }}
                                     </div>
                                 </div>
