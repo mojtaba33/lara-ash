@@ -22,9 +22,14 @@ class FavouriteController extends Controller
         }
         $product = Product::find($request->input('product_id'));
 
-        auth()->user()->favorites()->syncWithoutDetaching($product->id);
+        auth()->user()->favorites()->toggle($product->id);
 
-        return response(['title'   => 'success','message' => 'done!','color'   => 'green']);
+        return response([
+            'title'   => 'success',
+            'message' => 'done!',
+            'color'   => 'green' ,
+            'is_fav' => auth()->user()->is_fav($product)
+        ]);
     }
 
     public function destroy(Product $product)

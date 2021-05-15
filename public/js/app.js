@@ -2039,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         if (response.data.title == 'success') {
-          self.is_fav = true;
+          self.is_fav = response.data.is_fav;
         }
       })["catch"](function (error) {
         iziToast.show({
@@ -34418,6 +34418,7 @@ var render = function() {
                   expression: "count"
                 }
               ],
+              staticStyle: { "background-color": "#fff" },
               attrs: { type: "text", value: "1", disabled: "" },
               domProps: { value: _vm.count },
               on: {

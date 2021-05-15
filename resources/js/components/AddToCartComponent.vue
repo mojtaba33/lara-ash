@@ -5,7 +5,7 @@
                 <span>Quantity:</span>
                 <div class="pro-qty" style="position: relative">
                     <span @click="count > 1 ? count-- : count=1 " class="decrease">-</span>
-                    <input type="text" value="1" v-model="count" disabled>
+                    <input type="text" value="1" v-model="count" disabled style="background-color:#fff;">
                     <span @click="count++" class="increase">+</span>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                             color: response.data.color,
                         });
                         if(response.data.title == 'success'){
-                            self.is_fav = true;
+                            self.is_fav = response.data.is_fav;
                         }
                     })
                     .catch(function (error) {

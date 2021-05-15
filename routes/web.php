@@ -74,7 +74,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'IndexController@index');
 Route::get('/product/{product:slug}', 'ProductController@single');
 
-Route::post('/comment/add', 'CommentController@store')->name('add.comment')->middleware('verified');
+Route::post('/comment/add', 'CommentController@store')->name('add.comment')->middleware('auth');
 
 Route::get('category/','CategoryController@index')->name('category.all');
 Route::get('category/{category:slug}','CategoryController@single')->name('category.single');
