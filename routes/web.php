@@ -69,17 +69,18 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => ['a
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home')->middleware(['visit']);
 
-Route::get('/', 'IndexController@index');
-Route::get('/product/{product:slug}', 'ProductController@single');
+Route::get('/', 'IndexController@index')->middleware('visit');
+;
+Route::get('/product/{product:slug}', 'ProductController@single')->middleware('visit');
 
 Route::post('/comment/add', 'CommentController@store')->name('add.comment')->middleware('auth');
 
-Route::get('category/','CategoryController@index')->name('category.all');
-Route::get('category/{category:slug}','CategoryController@single')->name('category.single');
+Route::get('category/','CategoryController@index')->middleware('visit')->name('category.all');
+Route::get('category/{category:slug}','CategoryController@single')->middleware('visit')->name('category.single');
 
-Route::get('checkout','CheckoutController@index')->middleware(['verified','cart'])->name('checkout.index');
+Route::get('checkout','CheckoutController@index')->middleware(['verified','cart','visit'])->name('checkout.index');
 
 Route::prefix('cart')->group(function (){
     Route::post('/{product}','CartController@add')->name('add.to.cart');
@@ -98,12 +99,12 @@ Route::delete('fav/delete/{product}','FavouriteController@destroy')->name('delet
 Route::post('payment/{payment}', 'PaymentController@payment')->middleware('verified')->name('payment');
 Route::get('payment/checker/{payment}', 'PaymentController@checker')->name('callback.payment');
 
-Route::get('user/profile', 'UserController@profile')->name('user.profile')->middleware('verified');
+Route::get('user/profile', 'UserController@profile')->name('user.profile')->middleware(['verified','visit']);
 Route::patch('user/profile', 'UserController@update')->name('user.profile.update')->middleware('verified');
 
-Route::get('blog','BlogController@blog')->name('blog.all');
-Route::get('blog/{blog:slug}','BlogController@single')->name('blog.single');
-Route::get('blog/category/{category:slug}','BlogController@category')->name('blog.category');
+Route::get('blog','BlogController@blog')->name('blog.all')->middleware('visit');
+Route::get('blog/{blog:slug}','BlogController@single')->name('blog.single')->middleware('visit');
+Route::get('blog/category/{category:slug}','BlogController@category')->name('blog.category')->middleware('visit');
 
 Route::get('blog/tags/{tag}','BlogController@tag')->name('blog.tag');
 
@@ -116,5 +117,3 @@ Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback
 Route::post('check-coupon','CouponController@checkCoupon')->middleware('verified');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
