@@ -15,7 +15,7 @@
                     <select class="form-control m-bot15" name="parent_id" v-model="parent_id">
                         <option selected value="0" >سرگروه</option>
 
-                        <option :value="item.filter_id" v-for="item in parent" >
+                        <option :value="item.filter_id" v-for="(item,i) in parent" :key="i">
                             {{ item.title }}
                         </option>
 
@@ -36,7 +36,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="filter in filters">
+                <tr v-for="(filter,i) in filters" :key="i">
                     <td>{{ filter.title }}</td>
                     <td>{{ filter.parent }}</td>
                     <td>

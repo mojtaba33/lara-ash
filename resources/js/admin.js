@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('ck-editor', require('./components/Ckeditor.vue').default);
 Vue.component('filter-add', require('./components/FilterComponent.vue').default);
+Vue.component('visit-chart', require('./components/visits.vue').default);
 
 
 /**

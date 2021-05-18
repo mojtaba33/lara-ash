@@ -10,6 +10,6 @@ class Visit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ip' , 'user_id'
+        'ip' , 'user_id' ,'route'
     ];
 }

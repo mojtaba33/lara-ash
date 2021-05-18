@@ -60,7 +60,7 @@
                         <li><a href="/admin/#"><i class="icon-bell-alt"></i>اعلام ها</a></li> --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" value="logout" style="background: #a9d96c; padding: 15px 10px !important; width: 100%; display: inline-block; color: #fff; border-bottom: none !important; text-transform: uppercase;">
+                            <button type="submit" value="logout" style="border: none;background: #a9d96c; padding: 15px 10px !important; width: 100%; display: inline-block; color: #fff; border-bottom: none !important; text-transform: uppercase;">
                                 <i class="icon-key"></i>خروج</a>
                             </button>
                         </form>

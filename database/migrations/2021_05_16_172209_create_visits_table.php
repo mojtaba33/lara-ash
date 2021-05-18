@@ -17,6 +17,7 @@ class CreateVisitsTable extends Migration
             $table->id();
             $table->string('ip');
             $table->foreignId('user_id')->nullable();
+            $table->string('route')->nullable();
             $table->timestamps();
         });
     }

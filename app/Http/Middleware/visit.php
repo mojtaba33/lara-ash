@@ -17,16 +17,14 @@ class visit
      */
     public function handle(Request $request, Closure $next)
     {
+        $data = [
+            'ip' => $request->ip(),
+            'route' => $request->path()
+        ];
+
         if(auth()->check())
         {
-            $data = [
-                'ip' => $request->ip(),
-                'user_id' => auth()->user()->id
-            ];
-        }else{
-            $data = [
-                'ip' => $request->ip(),
-            ];
+            $data['user_id'] = auth()->user()->id;
         }
 
         AppVisit::create($data);

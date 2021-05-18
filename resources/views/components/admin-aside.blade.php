@@ -3,7 +3,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
             <li class="active">
-                <a class="" href="{{ url('/') }}">
+                <a class="" href="{{ url('/admin/panel') }}">
                     <i class="icon-dashboard"></i>
                     <span>صفحه اصلی</span>
                 </a>
