@@ -11,7 +11,7 @@ Clone the repository
 
   
 
-git clone https://github.com/mojtaba33/lara-ash.git laravel
+    git clone https://github.com/mojtaba33/lara-ash.git laravel
 
   
 
@@ -19,7 +19,7 @@ Switch to the repo folder
 
   
 
-cd laravel
+    cd laravel
 
   
 
@@ -27,7 +27,7 @@ Copy the example env file and make the required configuration changes in the .en
 
   
 
-cp .env.example .env (Set the database connection in .env)
+    cp .env.example .env (Set the database connection in .env)
 
   
   
@@ -36,7 +36,7 @@ Install all the dependencies using composer
 
   
 
-composer install
+    composer install
 
   
   
@@ -45,7 +45,7 @@ Generate a new application key
 
   
 
-php artisan key:generate
+    php artisan key:generate
 
   
   
@@ -54,7 +54,7 @@ Run the database migrations (**Set the database connection in .env before migrat
 
   
 
-php artisan migrate
+    php artisan migrate
 
   
 
@@ -62,7 +62,7 @@ Fill the database with fake information
 
   
 
-php artisan db:seed
+    php artisan db:seed
 
   
 
@@ -70,7 +70,7 @@ Start the local development server
 
   
 
-php artisan serve
+    php artisan serve
 
   
 
